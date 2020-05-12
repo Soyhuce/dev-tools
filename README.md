@@ -1,6 +1,7 @@
 # Dev Tools
 
-![Release](https://img.shields.io/badge/Release-2.4.0-blue.svg)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/soyhuce/dev-tools.svg?style=flat-square)](https://packagist.org/packages/soyhuce/dev-tools)
+[![Total Downloads](https://img.shields.io/packagist/dt/soyhuce/dev-tools.svg?style=flat-square)](https://packagist.org/packages/soyhuce/dev-tools)
 
 ## Description
 
@@ -11,12 +12,7 @@ This package provides a lot of tools for backend development
 You can install the package via composer:
 
 ``` bash
-$ composer require soyhuce/dev-tools
-```
-
-If you are using Laravel versions older than 5.5, add the service provider to the providers array in config/app.php:
-``` bash
-Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+$ composer require soyhuce/dev-tools --dev
 ```
 
 In Laravel, instead of adding the service provider in the config/app.php file, you can add the following code to your app/Providers/AppServiceProvider.php file, within the register() method:
