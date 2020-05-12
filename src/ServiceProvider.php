@@ -40,7 +40,10 @@ class ServiceProvider extends BaseServiceProvider
 
         $this->app->alias(DebugManager::class, 'debug');
 
-        $this->mergeConfigFrom(__DIR__ . '/config/config.php', 'dev-tools');
+        $this->mergeConfigFrom(
+            __DIR__ . '/../assets/config.php',
+            'dev-tools'
+        );
     }
 
     protected function registerMiddleware($middleware)

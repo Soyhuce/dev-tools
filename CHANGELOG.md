@@ -24,6 +24,13 @@ All notable changes to `soyhuce/dev-tools` will be documented in this file
 
 - Nothing
 
+
+## [2.4.1] - 2020-05-12
+
+### Fixed
+
+- Fix merging configuration file
+
 ## [2.4.0] - 2020-05-11
 
 ### Added
