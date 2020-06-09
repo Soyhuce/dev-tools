@@ -3,59 +3,46 @@
 namespace Soyhuce\DevTools\Debug\Collectors;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
 use Soyhuce\DevTools\Debug\Collectors\Concerns\RegistersDebugMiddleware;
+use Soyhuce\DevTools\Debug\Entries\Entry;
 
-/**
- * Class RequestCollector
- */
 class RequestCollector extends DataCollector
 {
     use RegistersDebugMiddleware;
 
-    private $data;
+    private ?Entry $entry = null;
 
     public function getName(): string
     {
         return 'request';
     }
 
-    public function isEnabled(): bool
-    {
-        return config('dev-tools.debugger.request.enabled');
-    }
-
     public function collect(): array
     {
-        return $this->data
-            ? [
-                [
-                    'time' => $this->data['time'],
-                    'pretty_time' => Carbon::createFromTimestamp((int) $this->data['time'])->toDateTimeString(),
-                    'message' => $this->getMessage(),
-                    'type' => $this->getName(),
-                ],
-            ]
-            : [];
+        if ($this->entry === null) {
+            return [];
+        }
+
+        return [$this->entry];
     }
 
     public function setRequest(Request $request)
     {
-        $this->data = [
-            'time' => $this->time(),
-            'url' => $request->url(),
-            'method' => $request->method(),
-            'params' => $request->all(),
-        ];
+        $this->entry = new Entry(
+            $this->getName(),
+            $this->formatRequest($request)
+        );
     }
 
-    private function getMessage()
+    private function formatRequest(Request $request): string
     {
-        $message = sprintf('%s %s ', $this->data['method'], $this->data['url']);
-        if ($this->data['params']) {
-            $message .= PHP_EOL . json_encode($this->data['params']);
+        $result = "{$request->method()} {$request->url()}";
+
+        $parameters = $request->all();
+        if ($parameters) {
+            $result .= PHP_EOL . json_encode($parameters, JSON_PRETTY_PRINT);
         }
 
-        return $message;
+        return $result;
     }
 }

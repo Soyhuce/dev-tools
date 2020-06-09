@@ -20,12 +20,13 @@ class DebugMiddleware
      */
     public function handle($request, Closure $next)
     {
+        $this->debugManager->request($request);
+
         return $next($request);
     }
 
     public function terminate($request, $response): void
     {
-        $this->debugManager->request($request);
         $this->debugManager->response($response);
     }
 }
