@@ -1,9 +1,8 @@
 <?php
 
-namespace Soyhuce\DevTools\Facades;
+namespace Soyhuce\DevTools\Debug;
 
 use Illuminate\Support\Facades\Facade;
-use Soyhuce\DevTools\DebugManager;
 
 /**
  * Class Debug

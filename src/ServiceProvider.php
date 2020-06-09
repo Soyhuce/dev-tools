@@ -4,7 +4,8 @@ namespace Soyhuce\DevTools;
 
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
-use Soyhuce\DevTools\Middleware\DebuggerMiddleware;
+use Soyhuce\DevTools\Debug\DebuggerMiddleware;
+use Soyhuce\DevTools\Debug\DebugManager;
 
 class ServiceProvider extends BaseServiceProvider
 {
