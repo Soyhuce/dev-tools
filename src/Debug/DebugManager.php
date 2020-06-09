@@ -3,7 +3,8 @@
 namespace Soyhuce\DevTools\Debug;
 
 use Illuminate\Contracts\Foundation\Application;
-use Log;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Log;
 use Soyhuce\DevTools\Debug\Collectors\DataCollector;
 use Soyhuce\DevTools\Debug\Collectors\MemoryCollector;
 use Soyhuce\DevTools\Debug\Collectors\MessageCollector;
@@ -13,6 +14,8 @@ use Soyhuce\DevTools\Debug\Collectors\QueryCollector;
 use Soyhuce\DevTools\Debug\Collectors\RequestCollector;
 use Soyhuce\DevTools\Debug\Collectors\ResponseCollector;
 use Soyhuce\DevTools\Debug\Collectors\TimeCollector;
+use Soyhuce\DevTools\Debug\Entries\Entry;
+use Soyhuce\DevTools\Debug\Entries\Warning;
 
 class DebugManager
 {
@@ -79,37 +82,36 @@ class DebugManager
 
     public function log(): void
     {
-        $report = implode(PHP_EOL, $this->data());
-        $warnings = implode(PHP_EOL, $this->warnings());
+        $report = $this->data()->implode(PHP_EOL);
+        $warnings = $this->warnings()->implode(PHP_EOL);
         if ($warnings) {
             $warnings = PHP_EOL . implode(PHP_EOL, [str_repeat('!', 60), $warnings, str_repeat('!', 60)]);
         }
-        \Log::debug(PHP_EOL . $report . $warnings);
+        Log::debug(PHP_EOL . $report . $warnings);
     }
 
-    private function data()
+    /**
+     * @return \Illuminate\Support\Collection<Entry>
+     */
+    private function data(): Collection
     {
         return collect($this->collectors)
-            ->flatMap
-            ->collect()
-            ->sortBy('time')
-            ->map(
-                static function ($datum) {
-                    return sprintf('=> [%s] %s : %s', $datum['pretty_time'], $datum['type'], $datum['message']);
-                }
-            )
-            ->toArray();
+            ->flatMap(function (DataCollector $collector) {
+                return $collector->collect();
+            })
+            ->sortBy(fn(Entry $entry) => $entry->getMicroTime())
+            ->map(fn(Entry $entry) => (string) $entry);
     }
 
-    private function warnings()
+    /**
+     * @return \Illuminate\Support\Collection<Warning>
+     */
+    private function warnings(): Collection
     {
         return collect($this->collectors)
-            ->flatMap
-            ->warnings()
-            ->map(
-                static function ($warning) {
-                    return sprintf('!! %s : %s', $warning['type'], $warning['message']);
-                }
-            )->toArray();
+            ->flatMap(function (DataCollector $collector) {
+                return $collector->warnings();
+            })
+            ->map(fn(Warning $warning) => (string) $warning);
     }
 }

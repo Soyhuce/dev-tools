@@ -11,6 +11,8 @@ return [
     'debugger' => [
         'enabled' => env('DEBUGGER_ENABLED', false),
 
+        'datetime_format' => 'Y-m-d H:i:s.u',
+
         'database' => [
             'enabled' => env('DEBUGGER_DATABASE_ENABLED', true),
 
