@@ -113,4 +113,22 @@ If another lib than jQuery is used for your AJAX calls, add your request the "HT
 
 ### Image Faker
 
-TODO
+Sometimes you want to generate images locally for testing, placeholders, ...
+
+You can then use `Soyhuce\DevTools\Faker\Image` to do so. For this, you have to install `intervention/image`.
+
+```
+Image::generate(int $width = 640, int $height = 640, ?string $text = null, string $encoding = 'jpg'): \Intervention\Image\Image
+```
+
+It will generate an image with random color and with the given text (or "width x height"). For example :
+
+`Image::generate(200, 150)`
+
+![](assets/doc/fake_image_200x150.jpg)
+
+`Image::generate(300, 100, 'The colors are not that good', 'png')`
+
+![](assets/doc/fake_image_text.png)
+
+See [intervention/image documentation](http://image.intervention.io/) to know how to use returned image.
