@@ -22,9 +22,9 @@ return [
 
             /*
              *  A warning is raised if number of queries is over this value
-             *  Setting it to 0 or null disable the warning
+             *  Setting it to null disable the warning
              */
-            'max_queries' => env('DEBUGGER_DATABASE_MAX_QUERIES', 0),
+            'max_queries' => env('DEBUGGER_DATABASE_MAX_QUERIES', null),
         ],
 
         'memory' => [
@@ -33,9 +33,9 @@ return [
             /*
              *  A warning is raised if memory peak is over this value
              *  Set the value with the unit, Mo for example
-             *  Setting it to 0 or null disable the warning
+             *  Setting it to null disable the warning
              */
-            'max' => env('DEBUGGER_MEMORY_MAX', 0),
+            'max' => env('DEBUGGER_MEMORY_MAX', null),
         ],
 
         'message' => [

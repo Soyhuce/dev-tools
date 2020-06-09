@@ -26,7 +26,7 @@ class MemoryCollector extends DataCollector
     {
         $max = config('dev-tools.debugger.memory.max');
 
-        if (!$max) {
+        if ($max === null) {
             return [];
         }
 
