@@ -97,19 +97,15 @@ public function theUsersAreCorrectlyImported()
 ```
 
 ### BottleneckMiddleware
-* Usage
 
-`BottleneckMiddleware` can be used as a classic middleware.
-To use it, just add the middleware path in the Kernel (see /App/Http/Kernel.php).
+This middleware adds some latency to your requests, server side. It can be useful to check how your application behaves when the user does not have a good network connection.
 
-* Configuration
+`Soyhuce\DevTools\Middlewares\BottleneckMiddleware` can be used as a classic middleware.
+To use it, just add the middleware in your `App/Http/Kernel.php` or in your route file(s).
 
-The `bottleneck.php` configuration file is located in the `vendor/soyhuce/dev-tools/src/config` directory.
-To adapt the sleep duration (in milliseconds), just modify the `duration` value.
+You can modify bottleneck duration in `config/dev-tools.php` file.
 
-In order to apply the bottleneck only for AJAX requests, you just have to change the boolean variable `only_ajax`.
-If another lib than jQuery is used for your AJAX calls, add your request the "HTTP_X_REQUESTED_WITH" header with "XMLHttpRequest" value.
-
+You also may want to apply it for only ajax requests. If so, adjust the `only_ajax` value. Please ensure that the ajax requests are sent with the `X-Requested-With` header set to `XMLHttpRequest`.
 
 ### Image Faker
 

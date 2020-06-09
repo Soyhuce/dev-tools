@@ -2,8 +2,10 @@
 
 return [
     'bottleneck' => [
+        // Sleep duration in ms
         'duration' => 1000,
-        'only_ajax' => true,
+
+        'only_ajax' => false,
     ],
 
     'debugger' => [
