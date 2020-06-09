@@ -5,6 +5,7 @@ namespace Soyhuce\DevTools\Debug;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
+use Soyhuce\DevTools\Debug\Collectors\CounterCollector;
 use Soyhuce\DevTools\Debug\Collectors\DataCollector;
 use Soyhuce\DevTools\Debug\Collectors\MemoryCollector;
 use Soyhuce\DevTools\Debug\Collectors\MessageCollector;
@@ -15,20 +16,21 @@ use Soyhuce\DevTools\Debug\Collectors\RequestCollector;
 use Soyhuce\DevTools\Debug\Collectors\ResponseCollector;
 use Soyhuce\DevTools\Debug\Collectors\TimeCollector;
 use Soyhuce\DevTools\Debug\Entries\Entry;
-use Soyhuce\DevTools\Debug\Entries\Warning;
+use Soyhuce\DevTools\Debug\Warnings\Warning;
 
 class DebugManager
 {
     use ForwardsCallsToCollectors;
 
     private static array $availableCollectors = [
-        MessageCollector::class,
-        RequestCollector::class,
+        CounterCollector::class,
         MemoryCollector::class,
+        MessageCollector::class,
         ModelCollector::class,
-        TimeCollector::class,
         QueryCollector::class,
+        RequestCollector::class,
         ResponseCollector::class,
+        TimeCollector::class,
     ];
 
     private Application $app;

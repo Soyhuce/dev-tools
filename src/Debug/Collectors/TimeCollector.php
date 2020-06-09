@@ -39,7 +39,7 @@ class TimeCollector extends DataCollector
         return config('dev-tools.debugger.time.enabled');
     }
 
-    public function boot()
+    public function boot(): void
     {
         $this->app->booted(
             function () {

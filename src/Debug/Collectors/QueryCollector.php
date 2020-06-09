@@ -39,7 +39,7 @@ class QueryCollector extends DataCollector
         return config('dev-tools.debugger.database.enabled');
     }
 
-    public function boot()
+    public function boot(): void
     {
         $this->app['db']->listen(
             function (QueryExecuted $event) {

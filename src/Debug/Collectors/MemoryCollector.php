@@ -3,7 +3,7 @@
 namespace Soyhuce\DevTools\Debug\Collectors;
 
 use Soyhuce\DevTools\Debug\Entries\Entry;
-use Soyhuce\DevTools\Debug\Entries\MemoryExceeded;
+use Soyhuce\DevTools\Debug\Warnings\MemoryExceeded;
 use Soyhuce\DevTools\Tools\Memory;
 
 class MemoryCollector extends DataCollector
@@ -13,11 +13,6 @@ class MemoryCollector extends DataCollector
     public function getName(): string
     {
         return 'memory';
-    }
-
-    public function isEnabled(): bool
-    {
-        return config('dev-tools.debugger.memory.enabled');
     }
 
     public function collect(): array

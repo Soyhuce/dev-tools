@@ -1,6 +1,6 @@
 <?php
 
-namespace Soyhuce\DevTools\Debug\Entries;
+namespace Soyhuce\DevTools\Debug\Warnings;
 
 use Soyhuce\DevTools\Tools\Memory;
 

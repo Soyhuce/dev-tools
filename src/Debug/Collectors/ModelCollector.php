@@ -3,14 +3,11 @@
 namespace Soyhuce\DevTools\Debug\Collectors;
 
 use Illuminate\Contracts\Events\Dispatcher;
-use Soyhuce\DevTools\Debug\Entries\Counter;
+use Illuminate\Support\Str;
 
-class ModelCollector extends DataCollector
+class ModelCollector extends CounterCollector
 {
     private Dispatcher $events;
-
-    /** @var array<\Soyhuce\DevTools\Debug\Entries\Counter> */
-    private array $counters = [];
 
     public function __construct(Dispatcher $events)
     {
@@ -22,32 +19,13 @@ class ModelCollector extends DataCollector
         return 'model';
     }
 
-    public function isEnabled(): bool
-    {
-        return config('dev-tools.debugger.model.enabled');
-    }
-
-    public function boot()
+    public function boot(): void
     {
         $this->events->listen('eloquent.retrieved: *', function (string $event, array $models) {
-            $this->incrementCounters(array_filter($models));
+            $this->increment(
+                Str::after($event, 'eloquent.retrieved: '),
+                count($models)
+            );
         });
-    }
-
-    private function incrementCounters(array $models): void
-    {
-        foreach ($models as $model) {
-            $this->getCounter(get_class($model))->increment();
-        }
-    }
-
-    private function getCounter(string $modelClass): Counter
-    {
-        return $this->counters[$modelClass] ??= new Counter($this->getName(), $modelClass);
-    }
-
-    public function collect(): array
-    {
-        return $this->counters;
     }
 }

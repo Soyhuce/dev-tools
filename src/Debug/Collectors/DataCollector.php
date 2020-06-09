@@ -9,9 +9,12 @@ abstract class DataCollector
 {
     abstract public function getName(): string;
 
-    abstract public function isEnabled(): bool;
+    public function isEnabled(): bool
+    {
+        return (bool) config("dev-tools.debugger.{$this->getName()}.enabled");
+    }
 
-    public function boot()
+    public function boot(): void
     {
     }
 
@@ -21,7 +24,7 @@ abstract class DataCollector
     abstract public function collect(): array;
 
     /**
-     * @return array<\Soyhuce\DevTools\Debug\Entries\Warning>
+     * @return array<\Soyhuce\DevTools\Debug\Warnings\Warning>
      */
     public function warnings(): array
     {
