@@ -2,20 +2,12 @@
 
 namespace Soyhuce\DevTools\Debug\Collectors;
 
-use Illuminate\Support\Carbon;
+use Soyhuce\DevTools\Debug\Entries\Entry;
 
-/**
- * Class MessageCollector
- */
 class MessageCollector extends DataCollector
 {
-    /** @var array */
-    private $messages;
-
-    public function __construct()
-    {
-        $this->messages = [];
-    }
+    /** @var array<Entry> */
+    private array $messages = [];
 
     public function getName(): string
     {
@@ -29,23 +21,11 @@ class MessageCollector extends DataCollector
 
     public function collect(): array
     {
-        return collect($this->messages)->map(
-            function ($message) {
-                return [
-                    'time' => $message['time'],
-                    'pretty_time' => Carbon::createFromTimestamp((int) $message['time'])->toDateTimeString(),
-                    'message' => $message['message'],
-                    'type' => $this->getName(),
-                ];
-            }
-        )->toArray();
+        return $this->messages;
     }
 
     public function addMessage(string $message)
     {
-        $this->messages[] = [
-            'time' => $this->time(),
-            'message' => $message,
-        ];
+        $this->messages[] = new Entry($this->getName(), $message);;
     }
 }
