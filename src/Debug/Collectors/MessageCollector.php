@@ -14,11 +14,6 @@ class MessageCollector extends DataCollector
         return 'message';
     }
 
-    public function isEnabled(): bool
-    {
-        return config('dev-tools.debugger.message.enabled');
-    }
-
     public function collect(): array
     {
         return $this->messages;
@@ -26,6 +21,6 @@ class MessageCollector extends DataCollector
 
     public function addMessage(string $message)
     {
-        $this->messages[] = new Entry($this->getName(), $message);;
+        $this->messages[] = new Entry($this->getName(), $message);
     }
 }
