@@ -2,54 +2,26 @@
 
 namespace Soyhuce\DevTools;
 
-use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
-use Soyhuce\DevTools\Debug\DebuggerMiddleware;
+use Soyhuce\DevTools\Debug\Debug;
 use Soyhuce\DevTools\Debug\DebugManager;
 
 class ServiceProvider extends BaseServiceProvider
 {
-    protected $defer = true;
-
-    /**
-     * Bootstrap the application services.
-     *
-     * @return void
-     */
-    public function boot()
+    public function boot(): void
     {
-        $this->registerMiddleware(DebuggerMiddleware::class);
-
         $this->publishes([
             __DIR__ . '/../assets/config.php' => config_path('dev-tools.php'),
-        ]);
+        ], 'config');
+
+        Debug::boot();
     }
 
-    /**
-     * Register the application services.
-     *
-     * @return void
-     */
-    public function register()
+    public function register(): void
     {
-        $this->app->singleton(
-            DebugManager::class,
-            function () {
-                return new DebugManager($this->app);
-            }
-        );
-
+        $this->app->singleton(DebugManager::class);
         $this->app->alias(DebugManager::class, 'debug');
 
-        $this->mergeConfigFrom(
-            __DIR__ . '/../assets/config.php',
-            'dev-tools'
-        );
-    }
-
-    protected function registerMiddleware($middleware)
-    {
-        $kernel = $this->app[Kernel::class];
-        $kernel->pushMiddleware($middleware);
+        $this->mergeConfigFrom(__DIR__ . '/../assets/config.php', 'dev-tools');
     }
 }
