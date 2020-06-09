@@ -1,11 +1,15 @@
 # Dev Tools
 
+Tools for Laravel development
+
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/soyhuce/dev-tools.svg?style=flat-square)](https://packagist.org/packages/soyhuce/dev-tools)
 [![Total Downloads](https://img.shields.io/packagist/dt/soyhuce/dev-tools.svg?style=flat-square)](https://packagist.org/packages/soyhuce/dev-tools)
 
-## Description
-
-This package provides a lot of tools for backend development
+- [Installation](#installation)
+- [Available tools](#available-tools)
+    - [Debug](#debug)
+    - [Bottleneck Middleware](#bottleneckmiddleware)
+    - [Image Faker](#image-faker)
 
 ## Installation
 
@@ -40,6 +44,7 @@ Add facade to your alias in `config\app.php` :
 
  * [Debug](#debug) : Debugging tool
  * [BottleneckMiddleware](#bottleneckmiddleware) : Middleware simulating a bottleneck
+ * [Image faker](#image-faker) : Generates random images locally
 
 ### Debug
 
@@ -104,3 +109,8 @@ To adapt the sleep duration (in milliseconds), just modify the `duration` value.
 
 In order to apply the bottleneck only for AJAX requests, you just have to change the boolean variable `only_ajax`.
 If another lib than jQuery is used for your AJAX calls, add your request the "HTTP_X_REQUESTED_WITH" header with "XMLHttpRequest" value.
+
+
+### Image Faker
+
+TODO
