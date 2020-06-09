@@ -3,19 +3,18 @@
 namespace Soyhuce\DevTools\Debug\Collectors;
 
 use Illuminate\Contracts\Events\Dispatcher;
-use Illuminate\Support\Str;
+use Soyhuce\DevTools\Debug\Entries\Counter;
 
 class ModelCollector extends DataCollector
 {
-    /** @var \Illuminate\Contracts\Events\Dispatcher */
-    private $events;
+    private Dispatcher $events;
 
-    private $models;
+    /** @var array<\Soyhuce\DevTools\Debug\Entries\Counter> */
+    private array $counters = [];
 
     public function __construct(Dispatcher $events)
     {
         $this->events = $events;
-        $this->models = [];
     }
 
     public function getName(): string
@@ -30,28 +29,25 @@ class ModelCollector extends DataCollector
 
     public function boot()
     {
-        $this->events->listen('eloquent.*', function ($event, $models) {
-            if (Str::contains($event, 'eloquent.retrieved')) {
-                foreach (array_filter($models) as $model) {
-                    $class = get_class($model);
-                    $this->models[$class] = ($this->models[$class] ?? 0) + 1;
-                }
-            }
+        $this->events->listen('eloquent.retrieved: *', function (string $event, array $models) {
+            $this->incrementCounters(array_filter($models));
         });
+    }
+
+    private function incrementCounters(array $models): void
+    {
+        foreach ($models as $model) {
+            $this->getCounter(get_class($model))->increment();
+        }
+    }
+
+    private function getCounter(string $modelClass): Counter
+    {
+        return $this->counters[$modelClass] ??= new Counter($this->getName(), $modelClass);
     }
 
     public function collect(): array
     {
-        $messages = [];
-        $now = now()->toDateTimeString();
-        foreach ($this->models as $model => $count) {
-            $messages[] = [
-                'pretty_time' => $now,
-                'type' => 'models',
-                'message' => "${model} : ${count}",
-            ];
-        }
-
-        return $messages;
+        return $this->counters;
     }
 }
