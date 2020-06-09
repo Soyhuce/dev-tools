@@ -3,6 +3,7 @@
 namespace Soyhuce\DevTools\Debug\Collectors;
 
 use Carbon\Carbon;
+use Soyhuce\DevTools\Debug\Collectors\Concerns\RegistersDebugMiddleware;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,6 +14,8 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
  */
 class ResponseCollector extends DataCollector
 {
+    use RegistersDebugMiddleware;
+
     /** @var array */
     private $data;
 

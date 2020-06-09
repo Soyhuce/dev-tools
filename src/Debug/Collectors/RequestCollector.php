@@ -4,12 +4,15 @@ namespace Soyhuce\DevTools\Debug\Collectors;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Soyhuce\DevTools\Debug\Collectors\Concerns\RegistersDebugMiddleware;
 
 /**
  * Class RequestCollector
  */
 class RequestCollector extends DataCollector
 {
+    use RegistersDebugMiddleware;
+
     private $data;
 
     public function getName(): string
