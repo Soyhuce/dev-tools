@@ -15,15 +15,16 @@ abstract class DataCollector
     {
     }
 
+    /**
+     * @return array<\Soyhuce\DevTools\Debug\Entries\Entry>
+     */
     abstract public function collect(): array;
 
+    /**
+     * @return array<\Soyhuce\DevTools\Debug\Entries\Warning>
+     */
     public function warnings(): array
     {
         return [];
-    }
-
-    protected function time(): float
-    {
-        return microtime(true);
     }
 }
