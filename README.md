@@ -37,7 +37,7 @@ php artisan vendor:publish --provider="Soyhuce\DevTools\ServiceProvider" --tag="
 
 Add facade to your alias in `config\app.php` :
 ```php
-'Debug' => Soyhuce\DevTools\Facades\Debug::class,
+'Debug' => \Soyhuce\DevTools\Debug\Debug::class,
 ```
 
 ## Available tools

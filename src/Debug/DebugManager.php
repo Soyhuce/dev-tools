@@ -1,19 +1,19 @@
 <?php
 
-namespace Soyhuce\DevTools;
+namespace Soyhuce\DevTools\Debug;
 
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 use Log;
-use Soyhuce\DevTools\Collectors\DataCollector;
-use Soyhuce\DevTools\Collectors\MemoryCollector;
-use Soyhuce\DevTools\Collectors\MessageCollector;
-use Soyhuce\DevTools\Collectors\ModelCollector;
-use Soyhuce\DevTools\Collectors\QueryCollector;
-use Soyhuce\DevTools\Collectors\RequestCollector;
-use Soyhuce\DevTools\Collectors\ResponseCollector;
-use Soyhuce\DevTools\Collectors\TimeCollector;
+use Soyhuce\DevTools\Debug\Collectors\DataCollector;
+use Soyhuce\DevTools\Debug\Collectors\MemoryCollector;
+use Soyhuce\DevTools\Debug\Collectors\MessageCollector;
+use Soyhuce\DevTools\Debug\Collectors\ModelCollector;
+use Soyhuce\DevTools\Debug\Collectors\QueryCollector;
+use Soyhuce\DevTools\Debug\Collectors\RequestCollector;
+use Soyhuce\DevTools\Debug\Collectors\ResponseCollector;
+use Soyhuce\DevTools\Debug\Collectors\TimeCollector;
 use Symfony\Component\HttpFoundation\Response;
 
 /**

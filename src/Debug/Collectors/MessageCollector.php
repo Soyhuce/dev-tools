@@ -1,6 +1,6 @@
 <?php
 
-namespace Soyhuce\DevTools\Collectors;
+namespace Soyhuce\DevTools\Debug\Collectors;
 
 use Illuminate\Support\Carbon;
 

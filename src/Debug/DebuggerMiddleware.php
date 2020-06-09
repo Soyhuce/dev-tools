@@ -1,11 +1,10 @@
 <?php
 
-namespace Soyhuce\DevTools\Middleware;
+namespace Soyhuce\DevTools\Debug;
 
 use Closure;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Contracts\Debug\ExceptionHandler;
-use Soyhuce\DevTools\DebugManager;
 
 /**
  * Class LogDebugger
