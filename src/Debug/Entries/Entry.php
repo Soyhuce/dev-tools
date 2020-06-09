@@ -6,17 +6,22 @@ use Illuminate\Support\Carbon;
 
 class Entry
 {
-    private float $microTime;
+    protected string $source;
 
-    private string $source;
+    protected string $message;
 
-    private string $message;
+    protected float $microTime;
 
     public function __construct(string $source, string $content)
     {
-        $this->microTime = microtime(true) * 1000;
         $this->source = $source;
         $this->message = $content;
+        $this->updateMicroTime();
+    }
+
+    protected function updateMicroTime(): void
+    {
+        $this->microTime = microtime(true) * 1000;
     }
 
     public function getMicroTime(): float
