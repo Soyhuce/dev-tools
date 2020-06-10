@@ -14,6 +14,10 @@ class NullCollector extends DataCollector
         return true;
     }
 
+    public function reset(): void
+    {
+    }
+
     public function collect(): array
     {
         return [];

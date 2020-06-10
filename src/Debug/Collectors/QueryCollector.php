@@ -42,6 +42,11 @@ class QueryCollector extends DataCollector
         $this->queries[] = new Query($this->getName(), $queryExecuted);
     }
 
+    public function reset(): void
+    {
+        $this->queries = [];
+    }
+
     public function collect(): array
     {
         $collection = $this->queries;

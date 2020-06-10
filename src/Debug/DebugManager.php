@@ -3,6 +3,7 @@
 namespace Soyhuce\DevTools\Debug;
 
 use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Http\Kernel as HttpKernel;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
@@ -53,6 +54,7 @@ class DebugManager
             return;
         }
 
+        $this->registerDebugMiddleware();
         $this->resolveCollectors();
         $this->app->terminating(function () {
             $this->log();
@@ -62,6 +64,17 @@ class DebugManager
     public function isEnabled(): bool
     {
         return config('dev-tools.debugger.enabled');
+    }
+
+    private function registerDebugMiddleware(): void
+    {
+        $httpKernel = app(HttpKernel::class);
+
+        if (!method_exists($httpKernel, 'pushMiddleware')) {
+            return;
+        }
+
+        $httpKernel->pushMiddleware(DebugMiddleware::class);
     }
 
     private function resolveCollectors(): void
@@ -80,6 +93,14 @@ class DebugManager
                 return [$collector->getName() => $collector];
             })
             ->all();
+    }
+
+    public function resetCollectors(): void
+    {
+        collect($this->collectors)
+            ->each(function (DataCollector $collector) {
+                $collector->reset();
+            });
     }
 
     public function log(): void

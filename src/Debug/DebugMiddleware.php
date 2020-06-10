@@ -20,6 +20,9 @@ class DebugMiddleware
      */
     public function handle($request, Closure $next)
     {
+        if (app()->environment('testing')) {
+            $this->debugManager->resetCollectors();
+        }
         $this->debugManager->request($request);
 
         return $next($request);

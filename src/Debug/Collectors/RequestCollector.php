@@ -3,18 +3,20 @@
 namespace Soyhuce\DevTools\Debug\Collectors;
 
 use Illuminate\Http\Request;
-use Soyhuce\DevTools\Debug\Collectors\Concerns\RegistersDebugMiddleware;
 use Soyhuce\DevTools\Debug\Entries\Entry;
 
 class RequestCollector extends DataCollector
 {
-    use RegistersDebugMiddleware;
-
     private ?Entry $entry = null;
 
     public function getName(): string
     {
         return 'request';
+    }
+
+    public function reset(): void
+    {
+        $this->entry = null;
     }
 
     public function collect(): array

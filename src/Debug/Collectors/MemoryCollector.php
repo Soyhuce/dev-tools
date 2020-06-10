@@ -15,6 +15,10 @@ class MemoryCollector extends DataCollector
         return 'memory';
     }
 
+    public function reset(): void
+    {
+    }
+
     public function collect(): array
     {
         return [

@@ -29,13 +29,18 @@ class TimeCollector extends DataCollector
     public function boot(): void
     {
         $this->app->booted(function () {
-            $startTime = $this->app['request']->server('REQUEST_TIME_FLOAT');
-
+            $startTime = $this->app['request']->server('REQUEST_TIME_FLOAT') ?? $this->app['request']->server('REQUEST_TIME');
             if ($startTime) {
                 $this->measures['Booting'] = new Measure($this->getName(), 'Booting', [microtime(true) - $startTime]);
             }
+            $this->startMeasure('Application');
         });
-        $this->startMeasure('Application');
+    }
+
+    public function reset(): void
+    {
+        $this->measures = [];
+        $this->boot();
     }
 
     public function startMeasure(string $name): void

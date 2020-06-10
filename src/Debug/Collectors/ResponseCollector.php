@@ -2,7 +2,6 @@
 
 namespace Soyhuce\DevTools\Debug\Collectors;
 
-use Soyhuce\DevTools\Debug\Collectors\Concerns\RegistersDebugMiddleware;
 use Soyhuce\DevTools\Debug\Entries\Entry;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -11,13 +10,16 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class ResponseCollector extends DataCollector
 {
-    use RegistersDebugMiddleware;
-
     private ?Entry $entry = null;
 
     public function getName(): string
     {
         return 'response';
+    }
+
+    public function reset(): void
+    {
+        $this->entry = null;
     }
 
     public function collect(): array
