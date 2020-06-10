@@ -21,7 +21,7 @@ use Soyhuce\DevTools\Debug\Warnings\Warning;
 
 class DebugManager
 {
-    use ForwardsCallsToCollectors;
+    use ForwardsCallsToCollectors, DefinesHelpers;
 
     private static array $availableCollectors = [
         CounterCollector::class,
