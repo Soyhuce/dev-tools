@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Facade;
 /**
  * @method static void boot()
  * @method static void log()
- * @method static void increment(string $name, int $counter = 1)
+ * @method static void incrementCounter(string $name, int $value = 1)
  * @method static void message(string $message)
  * @method static void request(\Illuminate\Http\Request $request)
  * @method static void response(\Symfony\Component\HttpFoundation\Response $response)
