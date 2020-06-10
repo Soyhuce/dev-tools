@@ -12,6 +12,8 @@ trait ForwardsCallsToCollectors
 
     private function getCollector($name): DataCollector
     {
+        $this->boot();
+
         return $this->collectors[$name];
     }
 

@@ -3,30 +3,22 @@
 namespace Soyhuce\DevTools\Debug\Collectors;
 
 use Illuminate\Foundation\Application;
-use Illuminate\Support\Carbon;
+use Soyhuce\DevTools\Debug\Entries\Measure;
+use Soyhuce\DevTools\Debug\Warnings\ApplicationDurationExceeded;
 
 /**
  * Class TimeCollector
  */
 class TimeCollector extends DataCollector
 {
-    /** @var Application */
-    private $app;
+    private Application $app;
 
-    /** @var array */
-    private $startedMeasures;
+    /** @var array<string, \Soyhuce\DevTools\Debug\Entries\Measure> */
+    private array $measures = [];
 
-    /** @var array */
-    private $measures;
-
-    /**
-     * TimeCollector constructor.
-     */
     public function __construct(Application $app)
     {
         $this->app = $app;
-        $this->startedMeasures = [];
-        $this->measures = [];
     }
 
     public function getName(): string
@@ -34,107 +26,67 @@ class TimeCollector extends DataCollector
         return 'time';
     }
 
-    public function isEnabled(): bool
-    {
-        return config('dev-tools.debugger.time.enabled');
-    }
-
     public function boot(): void
     {
-        $this->app->booted(
-            function () {
-                $startTime = $this->app['request']->server('REQUEST_TIME_FLOAT');
-                if ($startTime) {
-                    $this->addMeasure('Booting', $startTime, $this->time());
-                }
+        $this->app->booted(function () {
+            $startTime = $this->app['request']->server('REQUEST_TIME_FLOAT');
+
+            if ($startTime) {
+                $this->measures['Booting'] = new Measure($this->getName(), 'Booting', [microtime(true) - $startTime]);
             }
-        );
+        });
         $this->startMeasure('Application');
+    }
+
+    public function startMeasure(string $name): void
+    {
+        $this->getMeasure($name)->start();
+    }
+
+    public function stopMeasure(string $name): void
+    {
+        $this->getMeasure($name)->stop();
+    }
+
+    public function getMeasure(string $name): Measure
+    {
+        return $this->measures[$name] ??= new Measure($this->getName(), $name);
     }
 
     public function collect(): array
     {
-        foreach (array_keys($this->startedMeasures) as $name) {
-            $this->stopMeasure($name);
-        }
+        $this->stopRunningMeasures();
 
-        return collect($this->measures)
-            ->map(
-                function ($measure) {
-                    return [
-                        'time' => $measure['stop'],
-                        'pretty_time' => Carbon::createFromTimestamp((int) $measure['stop'])->toDateTimeString(),
-                        'message' => $measure['name'] . ' -> ' . $this->format($measure['duration']),
-                        'type' => $this->getName(),
-                    ];
-                }
-            )->toArray();
+        return array_values($this->measures);
     }
 
     public function warnings(): array
     {
-        foreach (array_keys($this->startedMeasures) as $name) {
-            $this->stopMeasure($name);
-        }
+        $this->stopRunningMeasures();
+
         $max = config('dev-tools.debugger.time.max_app_duration');
-        if (!$max || $duration = data_get($this->measures, 'Application.duration') <= $max / 1000) {
+
+        if ($max === null) {
+            return [];
+        }
+
+        $max = $max / 1000;
+        $appDuration = $this->measures['Application']->lastMeasure();
+        if ($appDuration <= $max) {
             return [];
         }
 
         return [
-            [
-                'message' => sprintf(
-                    'Application duration exceeded max %s allowed : %s',
-                    $this->format($max / 1000),
-                    $this->format($duration)
-                ),
-                'type' => $this->getName(),
-            ],
+            new ApplicationDurationExceeded($this->getName(), $max, $appDuration),
         ];
     }
 
-    public function startMeasure(string $name)
+    private function stopRunningMeasures(): void
     {
-        if ($this->hasStartedMeasure($name)) {
-            throw new \LogicException("A measure ${name} is already started");
+        foreach ($this->measures as $measure) {
+            if ($measure->isRunning()) {
+                $measure->stop();
+            }
         }
-        $this->startedMeasures[$name] = $this->time();
-    }
-
-    public function stopMeasure(string $name)
-    {
-        if (!$this->hasStartedMeasure($name)) {
-            throw new \LogicException("A measure ${name} is not started");
-        }
-        $this->addMeasure($name, $this->startedMeasures[$name], $this->time());
-
-        unset($this->startedMeasures[$name]);
-    }
-
-    public function addMeasure($name, $start, $stop)
-    {
-        $this->measures[$name] = [
-            'name' => $name,
-            'start' => $start,
-            'stop' => $stop,
-            'duration' => $stop - $start,
-        ];
-    }
-
-    private function hasStartedMeasure(string $name)
-    {
-        return isset($this->startedMeasures[$name]);
-    }
-
-    private function format($seconds)
-    {
-        if ($seconds < 0.001) {
-            return round($seconds * 1000000) . 'μs';
-        }
-        if ($seconds < 1) {
-            return round($seconds * 1000, 2) . 'ms';
-        }
-
-        return round($seconds, 2) . 's';
     }
 }
