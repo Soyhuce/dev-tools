@@ -105,14 +105,8 @@ class DebugManager
 
     public function log(): void
     {
-        $entries = $this->entries();
-        $warnings = $this->warnings();
-
-        if (!$warnings) {
-            Log::debug(PHP_EOL . $entries->implode(PHP_EOL));
-        }
-
-        Log::debug(PHP_EOL . $entries->implode(PHP_EOL) . PHP_EOL . $warnings->implode(PHP_EOL));
+        $messages = $this->entries()->merge($this->warnings())->implode(PHP_EOL);
+        Log::debug(PHP_EOL . $messages);
     }
 
     /**
