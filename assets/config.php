@@ -60,9 +60,9 @@ return [
             /*
             *  A warning is raised if duration is over this value
             *  Set the value in ms
-            *  Setting it to 0 or null disable the warning
+            *  Setting it to null disable the warning
             */
-            'max_app_duration' => env('DEBUGGER_TIME_MAX_APP', 0),
+            'max_app_duration' => env('DEBUGGER_TIME_MAX_APP', null),
         ],
     ],
 ];

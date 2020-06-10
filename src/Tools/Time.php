@@ -15,4 +15,9 @@ class Time
 
         return round($milliseconds, 2) . 'ms';
     }
+
+    public static function humanizeSeconds(float $seconds): string
+    {
+        return static::humanizeMilliseconds($seconds * 1000);
+    }
 }
