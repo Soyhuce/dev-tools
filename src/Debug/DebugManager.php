@@ -101,11 +101,11 @@ class DebugManager
     private function entries(): Collection
     {
         return collect($this->collectors)
-            ->flatMap(function (DataCollector $collector) {
+            ->flatMap(static function (DataCollector $collector) {
                 return $collector->collect();
             })
-            ->sortBy(fn(Entry $entry) => $entry->getMicroTime())
-            ->map(fn(Entry $entry) => (string) $entry);
+            ->sortBy(static fn (Entry $entry) => $entry->getMicroTime())
+            ->map(static fn (Entry $entry) => (string) $entry);
     }
 
     /**
@@ -114,19 +114,19 @@ class DebugManager
     private function warnings(): Collection
     {
         $warnings = collect($this->collectors)
-            ->flatMap(function (DataCollector $collector) {
+            ->flatMap(static function (DataCollector $collector) {
                 return $collector->warnings();
             })
-            ->map(fn(Warning $warning) => (string) $warning);
+            ->map(static fn (Warning $warning) => (string) $warning);
 
         if ($warnings->isEmpty()) {
             return $warnings;
         }
 
-        $maxLength = $warnings->max(fn(string $warning) => Str::length($warning));
+        $maxLength = $warnings->max(static fn (string $warning) => Str::length($warning));
 
         return $warnings
-            ->map(function (string $warning) use ($maxLength) {
+            ->map(static function (string $warning) use ($maxLength) {
                 return sprintf(
                     '!! %s%s !!',
                     $warning,

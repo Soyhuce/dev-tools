@@ -61,7 +61,7 @@ class Measure extends Entry
     private function singleMeasureMessage(): string
     {
         return sprintf(
-            "%s -> %s",
+            '%s -> %s',
             $this->message,
             Time::humanizeSeconds($this->measures[0])
         );
@@ -72,7 +72,7 @@ class Measure extends Entry
         $stats = new Stats($this->measures);
 
         return sprintf(
-            "%s -> %s cumulated on %s entries (avg : %s - min : %s - max : %s - std : %s)",
+            '%s -> %s cumulated on %s entries (avg : %s - min : %s - max : %s - std : %s)',
             $this->message,
             Time::humanizeSeconds($stats->sum()),
             $stats->count(),

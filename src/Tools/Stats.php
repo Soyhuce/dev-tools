@@ -48,12 +48,12 @@ class Stats
     {
         return $this->cache['std'] ??= $this->computeStd();
     }
-    
+
     private function computeStd(): float
     {
         $squares = array_reduce(
             $this->series,
-            fn($sum, $item) => $sum + ($this->avg() - $item) ** 2,
+            fn ($sum, $item) => $sum + ($this->avg() - $item) ** 2,
             0
         );
 

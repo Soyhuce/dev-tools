@@ -20,7 +20,7 @@ trait DefinesHelpers
         return $result;
     }
 
-    function dd(...$vars): void
+    public function dd(...$vars): void
     {
         foreach ($vars as $v) {
             VarDumper::dump($v);
