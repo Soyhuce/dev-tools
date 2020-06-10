@@ -6,11 +6,15 @@ All notable changes to `soyhuce/dev-tools` will be documented in this file
 
 ### Added
 
-- Nothing
+- CounterCollector
+- DebugManager::measuring(string $name, callable $callable)
+- DebugManager::dd(...$args)
+- Docblocks on Debug facade
 
 ### Changed
 
-- Nothing
+- Debug does not need anymore to be handled manually outside of an HTTP context. 
+- Time measures having same name are consolidated to provide statistics on durations. 
 
 ### Deprecated
 
@@ -18,7 +22,7 @@ All notable changes to `soyhuce/dev-tools` will be documented in this file
 
 ### Fixed
 
-- Nothing
+- Calling the DebugManager or a collector when disabled does not fail anymore
 
 ### Security
 
