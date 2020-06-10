@@ -21,10 +21,7 @@ class Warning
 
     protected function header(): string
     {
-        return sprintf(
-            '!! %s : ',
-            $this->source
-        );
+        return "{$this->source} : ";
     }
 
     protected function message(): string

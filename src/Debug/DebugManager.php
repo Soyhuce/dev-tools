@@ -5,6 +5,7 @@ namespace Soyhuce\DevTools\Debug;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 use Soyhuce\DevTools\Debug\Collectors\CounterCollector;
 use Soyhuce\DevTools\Debug\Collectors\DataCollector;
 use Soyhuce\DevTools\Debug\Collectors\MemoryCollector;
@@ -84,18 +85,20 @@ class DebugManager
 
     public function log(): void
     {
-        $report = $this->data()->implode(PHP_EOL);
-        $warnings = $this->warnings()->implode(PHP_EOL);
-        if ($warnings) {
-            $warnings = PHP_EOL . implode(PHP_EOL, [str_repeat('!', 60), $warnings, str_repeat('!', 60)]);
+        $entries = $this->entries();
+        $warnings = $this->warnings();
+
+        if (!$warnings) {
+            Log::debug(PHP_EOL . $entries->implode(PHP_EOL));
         }
-        Log::debug(PHP_EOL . $report . $warnings);
+
+        Log::debug(PHP_EOL . $entries->implode(PHP_EOL) . PHP_EOL . $warnings->implode(PHP_EOL));
     }
 
     /**
      * @return \Illuminate\Support\Collection<Entry>
      */
-    private function data(): Collection
+    private function entries(): Collection
     {
         return collect($this->collectors)
             ->flatMap(function (DataCollector $collector) {
@@ -110,10 +113,27 @@ class DebugManager
      */
     private function warnings(): Collection
     {
-        return collect($this->collectors)
+        $warnings = collect($this->collectors)
             ->flatMap(function (DataCollector $collector) {
                 return $collector->warnings();
             })
             ->map(fn(Warning $warning) => (string) $warning);
+
+        if ($warnings->isEmpty()) {
+            return $warnings;
+        }
+
+        $maxLength = $warnings->max(fn(string $warning) => Str::length($warning));
+
+        return $warnings
+            ->map(function (string $warning) use ($maxLength) {
+                return sprintf(
+                    '!! %s%s !!',
+                    $warning,
+                    str_repeat(' ', $maxLength - Str::length($warning))
+                );
+            })
+            ->prepend(str_repeat('!', $maxLength + 6))
+            ->push(str_repeat('!', $maxLength + 6));
     }
 }
