@@ -19,9 +19,9 @@ class CounterCollector extends DataCollector
         return array_values($this->counters);
     }
 
-    public function increment(string $counter, int $count = 1): void
+    public function increment(string $counter, int $value = 1): void
     {
-        $this->getCounter($counter)->increment($count);
+        $this->getCounter($counter)->increment($value);
     }
 
     private function getCounter(string $counterName): Counter

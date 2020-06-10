@@ -42,8 +42,8 @@ trait ForwardsCallsToCollectors
         $this->getCollector('time')->stopMeasure($name);
     }
 
-    public function increment(string $name, int $count = 1): void
+    public function incrementCounter(string $name, int $value = 1): void
     {
-        $this->getCollector('counter')->increment($name, $count);
+        $this->getCollector('counter')->increment($name, $value);
     }
 }
