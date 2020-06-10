@@ -4,6 +4,7 @@ namespace Soyhuce\DevTools\Debug;
 
 use Illuminate\Http\Request;
 use Soyhuce\DevTools\Debug\Collectors\DataCollector;
+use Soyhuce\DevTools\Debug\Collectors\NullCollector;
 use Symfony\Component\HttpFoundation\Response;
 
 trait ForwardsCallsToCollectors
@@ -14,7 +15,7 @@ trait ForwardsCallsToCollectors
     {
         $this->boot();
 
-        return $this->collectors[$name];
+        return $this->collectors[$name] ??= new NullCollector();
     }
 
     public function message(string $message): void
