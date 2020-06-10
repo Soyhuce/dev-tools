@@ -14,6 +14,11 @@ class MessageCollector extends DataCollector
         return 'message';
     }
 
+    public function reset(): void
+    {
+        $this->messages = [];
+    }
+
     public function collect(): array
     {
         return $this->messages;

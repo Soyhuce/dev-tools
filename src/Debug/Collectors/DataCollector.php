@@ -18,6 +18,8 @@ abstract class DataCollector
     {
     }
 
+    abstract public function reset(): void;
+
     /**
      * @return array<\Soyhuce\DevTools\Debug\Entries\Entry>
      */

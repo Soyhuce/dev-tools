@@ -14,6 +14,11 @@ class CounterCollector extends DataCollector
         return 'counter';
     }
 
+    public function reset(): void
+    {
+        $this->counters = [];
+    }
+
     public function collect(): array
     {
         return array_values($this->counters);
