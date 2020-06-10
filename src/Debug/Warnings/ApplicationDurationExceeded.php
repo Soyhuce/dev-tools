@@ -11,7 +11,7 @@ class ApplicationDurationExceeded extends Warning
         parent::__construct(
             $source,
             sprintf(
-                "Application duration exceeded max %s allowed : %s",
+                'Application duration exceeded max %s allowed : %s',
                 Time::humanizeSeconds($max),
                 Time::humanizeSeconds($actual)
             )

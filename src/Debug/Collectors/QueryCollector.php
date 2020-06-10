@@ -56,7 +56,7 @@ class QueryCollector extends DataCollector
         if ($max === null) {
             return [];
         }
-        
+
         $max = (int) $max;
         if (count($this->queries) <= $max) {
             return [];
