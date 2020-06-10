@@ -11,7 +11,6 @@ use Soyhuce\DevTools\Debug\Collectors\DataCollector;
 use Soyhuce\DevTools\Debug\Collectors\MemoryCollector;
 use Soyhuce\DevTools\Debug\Collectors\MessageCollector;
 use Soyhuce\DevTools\Debug\Collectors\ModelCollector;
-use Soyhuce\DevTools\Debug\Collectors\NullCollector;
 use Soyhuce\DevTools\Debug\Collectors\QueryCollector;
 use Soyhuce\DevTools\Debug\Collectors\RequestCollector;
 use Soyhuce\DevTools\Debug\Collectors\ResponseCollector;
@@ -71,8 +70,8 @@ class DebugManager
             ->map(function (string $collector): DataCollector {
                 return $this->app->make($collector);
             })
-            ->map(static function (DataCollector $collector): DataCollector {
-                return $collector->isEnabled() ? $collector : new NullCollector($collector->getName());
+            ->filter(static function (DataCollector $collector): bool {
+                return $collector->isEnabled();
             })
             ->each(static function (DataCollector $collector): void {
                 $collector->boot();
@@ -104,8 +103,8 @@ class DebugManager
             ->flatMap(static function (DataCollector $collector) {
                 return $collector->collect();
             })
-            ->sortBy(static fn (Entry $entry) => $entry->getMicroTime())
-            ->map(static fn (Entry $entry) => (string) $entry);
+            ->sortBy(static fn(Entry $entry) => $entry->getMicroTime())
+            ->map(static fn(Entry $entry) => (string) $entry);
     }
 
     /**
@@ -117,13 +116,13 @@ class DebugManager
             ->flatMap(static function (DataCollector $collector) {
                 return $collector->warnings();
             })
-            ->map(static fn (Warning $warning) => (string) $warning);
+            ->map(static fn(Warning $warning) => (string) $warning);
 
         if ($warnings->isEmpty()) {
             return $warnings;
         }
 
-        $maxLength = $warnings->max(static fn (string $warning) => Str::length($warning));
+        $maxLength = $warnings->max(static fn(string $warning) => Str::length($warning));
 
         return $warnings
             ->map(static function (string $warning) use ($maxLength) {
