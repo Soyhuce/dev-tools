@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static void response(\Symfony\Component\HttpFoundation\Response $response)
  * @method static void startMeasure(string $name)
  * @method static void stopMeasure(string $name)
- * @method static void measuring(string $name, callable $callable)
+ * @method static mixed measuring(string $name, callable $callable)
  * @method static void dd(...$vars)
  *
  * @see \Soyhuce\DevTools\Debug\DebugManager
