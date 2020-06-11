@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Facade;
 
 /**
  * @method static void boot()
+ * @method static void resetCollectors()
  * @method static void log()
  * @method static void incrementCounter(string $name, int $value = 1)
  * @method static void message(string $message)
