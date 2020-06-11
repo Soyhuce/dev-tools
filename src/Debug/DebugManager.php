@@ -97,16 +97,16 @@ class DebugManager
 
     public function resetCollectors(): void
     {
-        collect($this->collectors)
-            ->each(static function (DataCollector $collector) {
-                $collector->reset();
-            });
+        collect($this->collectors)->each(static function (DataCollector $collector) {
+            $collector->reset();
+        });
     }
 
     public function log(): void
     {
         $messages = $this->entries()->merge($this->warnings())->implode(PHP_EOL);
         Log::debug(PHP_EOL . $messages);
+        $this->resetCollectors();
     }
 
     /**
