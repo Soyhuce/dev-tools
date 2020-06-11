@@ -6,6 +6,28 @@ All notable changes to `soyhuce/dev-tools` will be documented in this file
 
 ### Added
 
+- Nothing
+
+### Changed
+
+- Nothing
+
+### Deprecated
+
+- Nothing
+
+### Fixed
+
+- Nothing
+
+### Security
+
+- Nothing
+
+## [3.0.0] - 2020-06-11
+
+### Added
+
 - CounterCollector
 - DebugManager::measuring(string $name, callable $callable)
 - DebugManager::dd(...$args)
@@ -17,18 +39,9 @@ All notable changes to `soyhuce/dev-tools` will be documented in this file
 - Debug does not need anymore to be handled manually outside of an HTTP context. 
 - Time measures having same name are consolidated to provide statistics on durations. 
 
-### Deprecated
-
-- Nothing
-
 ### Fixed
 
 - Calling the DebugManager or a collector when disabled does not fail anymore
-
-### Security
-
-- Nothing
-
 
 ## [2.4.1] - 2020-05-12
 
