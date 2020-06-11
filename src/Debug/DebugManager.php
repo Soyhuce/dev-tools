@@ -120,8 +120,8 @@ class DebugManager
             ->flatMap(static function (DataCollector $collector) {
                 return $collector->collect();
             })
-            ->sortBy(static fn(Entry $entry) => $entry->getMicroTime())
-            ->map(static fn(Entry $entry) => (string) $entry);
+            ->sortBy(static fn (Entry $entry) => $entry->getMicroTime())
+            ->map(static fn (Entry $entry) => (string) $entry);
     }
 
     /**
@@ -133,13 +133,13 @@ class DebugManager
             ->flatMap(static function (DataCollector $collector) {
                 return $collector->warnings();
             })
-            ->map(static fn(Warning $warning) => (string) $warning);
+            ->map(static fn (Warning $warning) => (string) $warning);
 
         if ($warnings->isEmpty()) {
             return $warnings;
         }
 
-        $maxLength = $warnings->max(static fn(string $warning) => Str::length($warning));
+        $maxLength = $warnings->max(static fn (string $warning) => Str::length($warning));
 
         return $warnings
             ->map(static function (string $warning) use ($maxLength) {
