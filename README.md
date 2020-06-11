@@ -35,6 +35,7 @@ You can also add the facade to your alias in `config\app.php` :
 ## Available tools
 
  - [Debug](#debug) : Debugging tools
+    - [Artisan](#artisan)
     - [Counter](#counter)
     - [Database](#database)
     - [Memory](#memory)
@@ -54,6 +55,19 @@ When activated, it allows logging some information on request execution: HTTP re
 All collected information timestamped and sent in your default log channel, with debug level.
 
 Every module can be activated or deactivated separately thanks to the config file. You can configure the timestamp format as you wish.
+
+### Artisan
+
+Information are collected when running artisan commands. Artisan collector will collect the command name, argument and options when collection comes from an artisan command.
+
+```php
+php artisan make:model User -m -f
+```
+```
+[2020-06-11 08:26:38] local.DEBUG: 
+=> [2020-06-11 08:26:38.574492] artisan : 'make:model' User -m -f
+
+```
 
 #### Counter
 

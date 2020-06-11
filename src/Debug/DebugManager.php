@@ -7,6 +7,7 @@ use Illuminate\Contracts\Http\Kernel as HttpKernel;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
+use Soyhuce\DevTools\Debug\Collectors\ArtisanCollector;
 use Soyhuce\DevTools\Debug\Collectors\CounterCollector;
 use Soyhuce\DevTools\Debug\Collectors\DataCollector;
 use Soyhuce\DevTools\Debug\Collectors\MemoryCollector;
@@ -24,6 +25,7 @@ class DebugManager
     use ForwardsCallsToCollectors, DefinesHelpers;
 
     private static array $availableCollectors = [
+        ArtisanCollector::class,
         CounterCollector::class,
         MemoryCollector::class,
         MessageCollector::class,
@@ -118,8 +120,8 @@ class DebugManager
             ->flatMap(static function (DataCollector $collector) {
                 return $collector->collect();
             })
-            ->sortBy(static fn (Entry $entry) => $entry->getMicroTime())
-            ->map(static fn (Entry $entry) => (string) $entry);
+            ->sortBy(static fn(Entry $entry) => $entry->getMicroTime())
+            ->map(static fn(Entry $entry) => (string) $entry);
     }
 
     /**
@@ -131,13 +133,13 @@ class DebugManager
             ->flatMap(static function (DataCollector $collector) {
                 return $collector->warnings();
             })
-            ->map(static fn (Warning $warning) => (string) $warning);
+            ->map(static fn(Warning $warning) => (string) $warning);
 
         if ($warnings->isEmpty()) {
             return $warnings;
         }
 
-        $maxLength = $warnings->max(static fn (string $warning) => Str::length($warning));
+        $maxLength = $warnings->max(static fn(string $warning) => Str::length($warning));
 
         return $warnings
             ->map(static function (string $warning) use ($maxLength) {

@@ -13,6 +13,10 @@ return [
 
         'datetime_format' => 'Y-m-d H:i:s.u',
 
+        'artisan' => [
+            'enabled' => env('DEBUGGER_ARTISAN_ENABLED', true),
+        ],
+
         'counter' => [
             'enabled' => env('DEBUGGER_COUNTER_ENABLED', true),
         ],

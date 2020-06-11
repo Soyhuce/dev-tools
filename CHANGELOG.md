@@ -10,6 +10,7 @@ All notable changes to `soyhuce/dev-tools` will be documented in this file
 - DebugManager::measuring(string $name, callable $callable)
 - DebugManager::dd(...$args)
 - Docblocks on Debug facade
+- ArtisanCollector
 
 ### Changed
 
