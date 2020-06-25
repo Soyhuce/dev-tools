@@ -24,6 +24,11 @@ All notable changes to `soyhuce/dev-tools` will be documented in this file
 
 - Nothing
 
+## [3.0.1] - 2020-06-25
+
+### Fixed
+- Fix issue when following redirect into tests (bc191b4cd8fc44b0885e48807e65107a87a93d2b)
+
 ## [3.0.0] - 2020-06-11
 
 ### Added
