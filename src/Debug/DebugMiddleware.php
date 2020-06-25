@@ -34,7 +34,7 @@ class DebugMiddleware
         if ($response instanceof TestResponse) {
             $response = $response->baseResponse;
         }
-        
+
         $this->debugManager->response($response);
     }
 }
