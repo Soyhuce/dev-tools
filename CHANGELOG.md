@@ -24,6 +24,12 @@ All notable changes to `soyhuce/dev-tools` will be documented in this file
 
 - Nothing
 
+## [3.1.0] - 2020-08-27
+
+### Changed
+- Drop Laravel 6 support
+- Add Laravel 8 support
+
 ## [3.0.1] - 2020-06-25
 
 ### Fixed
