@@ -24,6 +24,12 @@ All notable changes to `soyhuce/dev-tools` will be documented in this file
 
 - Nothing
 
+## [3.2.0] - 2020-11-09
+
+### Added
+
+- Add PHP8 Support
+
 ## [3.1.0] - 2020-08-27
 
 ### Changed
