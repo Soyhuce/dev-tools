@@ -6,11 +6,14 @@ All notable changes to `soyhuce/dev-tools` will be documented in this file
 
 ### Added
 
-- Nothing
+- Phpstan analysis
 
 ### Changed
 
-- Nothing
+- Drop Laravel 7 support
+- Drop php 7.4 support
+- Upgrade dependencies
+- Use php 8.0 syntax
 
 ### Deprecated
 
