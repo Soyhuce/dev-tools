@@ -23,7 +23,10 @@ class NullCollector extends DataCollector
         return [];
     }
 
-    public function __call($name, $arguments): void
+    /**
+     * @param array<mixed> $arguments
+     */
+    public function __call(string $name, array $arguments): void
     {
     }
 }

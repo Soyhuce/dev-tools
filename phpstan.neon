@@ -1,0 +1,16 @@
+includes:
+  - ./vendor-bin/phpstan/vendor/nunomaduro/larastan/extension.neon
+  - phpstan-baseline.neon
+
+parameters:
+
+  paths:
+    - src
+
+  # Level 8 is max
+  level: 8
+
+  ignoreErrors:
+
+  checkMissingIterableValueType: true
+  checkGenericClassInNonGenericObjectType: false

@@ -8,11 +8,9 @@ use function count;
 
 class ModelCollector extends CounterCollector
 {
-    private Dispatcher $events;
-
-    public function __construct(Dispatcher $events)
-    {
-        $this->events = $events;
+    public function __construct(
+        private Dispatcher $events,
+    ) {
     }
 
     public function getName(): string

@@ -25,6 +25,7 @@ class DebugManager
     use DefinesHelpers;
     use ForwardsCallsToCollectors;
 
+    /** @var array<class-string<\Soyhuce\DevTools\Debug\Collectors\DataCollector>> */
     private static array $availableCollectors = [
         ArtisanCollector::class,
         CounterCollector::class,
@@ -37,13 +38,11 @@ class DebugManager
         TimeCollector::class,
     ];
 
-    private Application $app;
-
     private bool $booted = false;
 
-    public function __construct(Application $app)
-    {
-        $this->app = $app;
+    public function __construct(
+        private Application $app,
+    ) {
     }
 
     public function boot(): void
@@ -83,18 +82,12 @@ class DebugManager
     private function resolveCollectors(): void
     {
         $this->collectors = collect(static::$availableCollectors)
-            ->map(function (string $collector): DataCollector {
-                return $this->app->make($collector);
-            })
-            ->filter(static function (DataCollector $collector): bool {
-                return $collector->isEnabled();
-            })
+            ->map(fn (string $collector): DataCollector => $this->app->make($collector))
+            ->filter(static fn (DataCollector $collector): bool => $collector->isEnabled())
             ->each(static function (DataCollector $collector): void {
                 $collector->boot();
             })
-            ->mapWithKeys(static function (DataCollector $collector): array {
-                return [$collector->getName() => $collector];
-            })
+            ->mapWithKeys(static fn (DataCollector $collector): array => [$collector->getName() => $collector])
             ->all();
     }
 
@@ -113,7 +106,7 @@ class DebugManager
     }
 
     /**
-     * @return \Illuminate\Support\Collection<Entry>
+     * @return \Illuminate\Support\Collection<string>
      */
     private function entries(): Collection
     {
@@ -126,7 +119,7 @@ class DebugManager
     }
 
     /**
-     * @return \Illuminate\Support\Collection<Warning>
+     * @return \Illuminate\Support\Collection<string>
      */
     private function warnings(): Collection
     {
@@ -140,7 +133,7 @@ class DebugManager
             return $warnings;
         }
 
-        $maxLength = $warnings->max(static fn (string $warning) => Str::length($warning));
+        $maxLength = (int) $warnings->max(static fn (string $warning) => Str::length($warning));
 
         return $warnings
             ->map(static function (string $warning) use ($maxLength) {

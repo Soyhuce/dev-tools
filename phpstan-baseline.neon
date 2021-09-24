@@ -1,0 +1,52 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Cannot cast Symfony\\\\Component\\\\Console\\\\Input\\\\InputInterface\\|null to string\\.$#"
+			count: 1
+			path: src/Debug/Collectors/ArtisanCollector.php
+
+		-
+			message: "#^Call to an undefined method Soyhuce\\\\DevTools\\\\Debug\\\\Collectors\\\\DataCollector\\:\\:addMessage\\(\\)\\.$#"
+			count: 1
+			path: src/Debug/DebugManager.php
+
+		-
+			message: "#^Call to an undefined method Soyhuce\\\\DevTools\\\\Debug\\\\Collectors\\\\DataCollector\\:\\:increment\\(\\)\\.$#"
+			count: 1
+			path: src/Debug/DebugManager.php
+
+		-
+			message: "#^Call to an undefined method Soyhuce\\\\DevTools\\\\Debug\\\\Collectors\\\\DataCollector\\:\\:setRequest\\(\\)\\.$#"
+			count: 1
+			path: src/Debug/DebugManager.php
+
+		-
+			message: "#^Call to an undefined method Soyhuce\\\\DevTools\\\\Debug\\\\Collectors\\\\DataCollector\\:\\:setResponse\\(\\)\\.$#"
+			count: 1
+			path: src/Debug/DebugManager.php
+
+		-
+			message: "#^Call to an undefined method Soyhuce\\\\DevTools\\\\Debug\\\\Collectors\\\\DataCollector\\:\\:startMeasure\\(\\)\\.$#"
+			count: 1
+			path: src/Debug/DebugManager.php
+
+		-
+			message: "#^Call to an undefined method Soyhuce\\\\DevTools\\\\Debug\\\\Collectors\\\\DataCollector\\:\\:stopMeasure\\(\\)\\.$#"
+			count: 1
+			path: src/Debug/DebugManager.php
+
+		-
+			message: "#^Array \\(array\\<float\\|int\\>\\) does not accept float\\|int\\|false\\.$#"
+			count: 2
+			path: src/Tools/Stats.php
+
+		-
+			message: "#^Method Soyhuce\\\\DevTools\\\\Tools\\\\Stats\\:\\:max\\(\\) should return float\\|int but returns float\\|int\\|false\\.$#"
+			count: 1
+			path: src/Tools/Stats.php
+
+		-
+			message: "#^Method Soyhuce\\\\DevTools\\\\Tools\\\\Stats\\:\\:min\\(\\) should return float\\|int but returns float\\|int\\|false\\.$#"
+			count: 1
+			path: src/Tools/Stats.php
+

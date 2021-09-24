@@ -7,24 +7,24 @@ use Closure;
 class BottleneckMiddleware
 {
     /**
-     * Handle an incoming request.
-     *
      * @param \Illuminate\Http\Request $request
-     * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next): mixed
     {
         $this->sleep($request);
 
         return $next($request);
     }
 
+    /**
+     * @param \Illuminate\Http\Request $request
+     */
     private function sleep($request): void
     {
         if (config('dev-tools.bottleneck.only_ajax') && !$request->ajax()) {
             return;
         }
 
-        usleep(config('dev-tools.bottleneck.duration') * 1000);
+        usleep((int) config('dev-tools.bottleneck.duration') * 1000);
     }
 }

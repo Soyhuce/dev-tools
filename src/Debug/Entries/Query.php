@@ -38,7 +38,7 @@ class Query extends Entry
             $regex = is_numeric($key)
                 ? "/\\?(?=(?:[^'\\\\']*'[^'\\\\']*')*[^'\\\\']*$)/"
                 : "/:{$key}(?=(?:[^'\\\\']*'[^'\\\\']*')*[^'\\\\']*$)/";
-            $query = preg_replace($regex, $pdo->quote($binding), $query, 1);
+            $query = (string) preg_replace($regex, $pdo->quote($binding), $query, 1);
         }
 
         return $query;

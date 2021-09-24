@@ -6,10 +6,7 @@ use Symfony\Component\VarDumper\VarDumper;
 
 trait DefinesHelpers
 {
-    /**
-     * @return mixed
-     */
-    public function measuring(string $name, callable $callable)
+    public function measuring(string $name, callable $callable): mixed
     {
         $this->startMeasure($name);
         $result = $callable();
@@ -18,7 +15,7 @@ trait DefinesHelpers
         return $result;
     }
 
-    public function dd(...$vars): void
+    public function dd(mixed ...$vars): void
     {
         foreach ($vars as $v) {
             VarDumper::dump($v);

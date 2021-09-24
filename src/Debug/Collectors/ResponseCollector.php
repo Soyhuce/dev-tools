@@ -39,7 +39,7 @@ class ResponseCollector extends DataCollector
         );
     }
 
-    private function getContent(Response $response)
+    private function getContent(Response $response): string
     {
         if ($response instanceof BinaryFileResponse) {
             return '[Binary data]';

@@ -6,7 +6,7 @@ class Memory
 {
     public static function humanize(int $size, int $precision = 2): string
     {
-        if ($size === 0 || $size === null) {
+        if ($size === 0) {
             return '0o';
         }
 
@@ -37,7 +37,7 @@ class Memory
             case 'GO':
                 return $number * 1024 ** 3;
             default:
-                return $value;
+                return $number;
         }
     }
 }

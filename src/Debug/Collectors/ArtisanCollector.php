@@ -10,11 +10,9 @@ class ArtisanCollector extends DataCollector
 {
     private ?Entry $entry = null;
 
-    private Dispatcher $events;
-
-    public function __construct(Dispatcher $events)
-    {
-        $this->events = $events;
+    public function __construct(
+        private Dispatcher $events,
+    ) {
     }
 
     public function getName(): string

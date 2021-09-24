@@ -23,12 +23,12 @@ class Image
         $fontColor = ColorUtils::getComplementaryColor($backgroundColor);
         $img = ImageManagerStatic::canvas($width, $height, $backgroundColor);
         $text = $text ?? $width . 'x' . $height;
-        $fontSize = $width / mb_strlen($text);
+        $fontSize = (int) ($width / mb_strlen($text));
 
         $img->text(
             $text,
-            $width / 2,
-            $height / 2,
+            (int) ($width / 2),
+            (int) ($height / 2),
             static function (AbstractFont $font) use ($fontSize, $fontColor): void {
                 $font->file(__DIR__ . '/../../assets/CamingoCode-Italic.ttf');
                 $font->size($fontSize);
@@ -42,6 +42,10 @@ class Image
         return $img;
     }
 
+    /**
+     * @static
+     * @return array{int, int, int}
+     */
     private static function generateRandomColor(): array
     {
         return [mt_rand(0, 255), mt_rand(0, 255), mt_rand(0, 255)];
