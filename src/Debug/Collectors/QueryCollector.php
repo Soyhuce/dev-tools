@@ -7,6 +7,7 @@ use Illuminate\Foundation\Application;
 use Soyhuce\DevTools\Debug\Entries\Entry;
 use Soyhuce\DevTools\Debug\Entries\Query;
 use Soyhuce\DevTools\Debug\Warnings\QueriesExceeded;
+use function count;
 
 class QueryCollector extends DataCollector
 {
@@ -17,8 +18,6 @@ class QueryCollector extends DataCollector
 
     /**
      * QueryCollector constructor.
-     *
-     * @param Application $app
      */
     public function __construct(Application $app)
     {
@@ -32,7 +31,7 @@ class QueryCollector extends DataCollector
 
     public function boot(): void
     {
-        $this->app['db']->listen(function (QueryExecuted $event) {
+        $this->app['db']->listen(function (QueryExecuted $event): void {
             $this->addQuery($event);
         });
     }

@@ -2,16 +2,18 @@
 
 namespace Soyhuce\DevTools\Tools;
 
+use function count;
+
 class Stats
 {
     private array $series;
 
     private array $cache = [];
 
-    /** @var int|float|null */
+    /** @var float|int|null */
     private $min;
 
-    /** @var int|float */
+    /** @var float|int */
     private $max;
 
     public function __construct(array $series)

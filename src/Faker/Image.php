@@ -13,7 +13,7 @@ class Image
         int $width = 640,
         int $height = 640,
         ?string $text = null,
-        string $encoding = 'jpg'
+        string $encoding = 'jpg',
     ): InterventionImage {
         if (!class_exists('Intervention\Image\Image')) {
             throw new Exception('package intervention/image is required to use Image::generate');
@@ -29,7 +29,7 @@ class Image
             $text,
             $width / 2,
             $height / 2,
-            static function (AbstractFont $font) use ($fontSize, $fontColor) {
+            static function (AbstractFont $font) use ($fontSize, $fontColor): void {
                 $font->file(__DIR__ . '/../../assets/CamingoCode-Italic.ttf');
                 $font->size($fontSize);
                 $font->align('center');

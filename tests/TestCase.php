@@ -5,6 +5,9 @@ namespace Soyhuce\DevTools\Test;
 use Illuminate\Foundation\Auth\User;
 use Orchestra\Testbench\TestCase as Orchestra;
 
+/**
+ * @coversNothing
+ */
 class TestCase extends Orchestra
 {
     protected function getPackageProviders($app): array

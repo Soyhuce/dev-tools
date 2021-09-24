@@ -22,7 +22,8 @@ use Soyhuce\DevTools\Debug\Warnings\Warning;
 
 class DebugManager
 {
-    use ForwardsCallsToCollectors, DefinesHelpers;
+    use DefinesHelpers;
+    use ForwardsCallsToCollectors;
 
     private static array $availableCollectors = [
         ArtisanCollector::class,
@@ -58,7 +59,7 @@ class DebugManager
 
         $this->registerDebugMiddleware();
         $this->resolveCollectors();
-        $this->app->terminating(function () {
+        $this->app->terminating(function (): void {
             $this->log();
         });
     }
@@ -99,7 +100,7 @@ class DebugManager
 
     public function resetCollectors(): void
     {
-        collect($this->collectors)->each(static function (DataCollector $collector) {
+        collect($this->collectors)->each(static function (DataCollector $collector): void {
             $collector->reset();
         });
     }
