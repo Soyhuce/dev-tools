@@ -11,17 +11,15 @@ use function count;
 
 class QueryCollector extends DataCollector
 {
-    private Application $app;
-
     /** @var array<\Soyhuce\DevTools\Debug\Entries\Query> */
     private array $queries = [];
 
     /**
      * QueryCollector constructor.
      */
-    public function __construct(Application $app)
-    {
-        $this->app = $app;
+    public function __construct(
+        private Application $app,
+    ) {
     }
 
     public function getName(): string

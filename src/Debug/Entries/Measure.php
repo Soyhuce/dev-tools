@@ -11,13 +11,15 @@ class Measure extends Entry
 {
     private ?float $startedAt = null;
 
-    /** @var array<float> */
-    private array $measures;
-
-    public function __construct(string $source, string $content, array $measures = [])
-    {
-        parent::__construct($source, $content);
-        $this->measures = $measures;
+    /**
+     * @param array<float> $measures
+     */
+    public function __construct(
+        string $source,
+        string $message,
+        private array $measures = [],
+    ) {
+        parent::__construct($source, $message);
     }
 
     public function isRunning(): bool

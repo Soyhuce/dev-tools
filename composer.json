@@ -54,9 +54,11 @@
         "post-update-cmd": "@composer bin all update --ansi",
         "cs": "vendor/bin/php-cs-fixer fix",
         "test": "vendor/bin/phpunit --config=phpunit.xml",
+        "analyse": "vendor/bin/phpstan analyse",
         "all": [
             "@cs",
-            "@test"
+            "@test",
+            "@analyse"
         ]
     },
     "minimum-stability": "dev",

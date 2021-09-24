@@ -6,47 +6,43 @@ use function count;
 
 class Stats
 {
-    private array $series;
-
+    /** @var array<float|int> */
     private array $cache = [];
 
-    /** @var float|int|null */
-    private $min;
-
-    /** @var float|int */
-    private $max;
-
-    public function __construct(array $series)
-    {
-        $this->series = $series;
+    /**
+     * @param array<float|int> $series
+     */
+    public function __construct(
+        private array $series,
+    ) {
     }
 
-    public function sum()
+    public function sum(): int|float
     {
         return $this->cache['sum'] ??= array_sum($this->series);
     }
 
-    public function count()
+    public function count(): int|float
     {
         return $this->cache['count'] ??= count($this->series);
     }
 
-    public function max()
+    public function max(): int|float
     {
         return $this->cache['max'] ??= max($this->series);
     }
 
-    public function min()
+    public function min(): int|float
     {
         return $this->cache['min'] ??= min($this->series);
     }
 
-    public function avg()
+    public function avg(): float
     {
         return $this->cache['avg'] ??= $this->sum() / $this->count();
     }
 
-    public function std()
+    public function std(): float
     {
         return $this->cache['std'] ??= $this->computeStd();
     }

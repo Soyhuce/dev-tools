@@ -9,9 +9,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 trait ForwardsCallsToCollectors
 {
+    /** @var array<string, \Soyhuce\DevTools\Debug\Collectors\DataCollector> */
     private array $collectors = [];
 
-    private function getCollector($name): DataCollector
+    private function getCollector(string $name): DataCollector
     {
         $this->boot();
 

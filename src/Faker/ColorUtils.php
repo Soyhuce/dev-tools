@@ -4,6 +4,10 @@ namespace Soyhuce\DevTools\Faker;
 
 class ColorUtils
 {
+    /**
+     * @param array{int, int, int} $rgb
+     * @return array{int, int, int}
+     */
     public static function getComplementaryColor(array $rgb): array
     {
         $hsv = static::rgbtohsv($rgb);
@@ -14,9 +18,13 @@ class ColorUtils
         $vp = ($v * ($s - 1) + 1);
         $sp = ($v * $s) / $vp;
 
-        return static::hsvtorgb([$hp, $sp, $vp]);
+        return static::hsvtorgb([(int) $hp, (int) $sp, (int) $vp]);
     }
 
+    /**
+     * @param array{int, int, int} $rgb
+     * @return array{int, int, int}
+     */
     public static function rgbtohsv(array $rgb): array
     {
         // HSV Results:Number 0-1
@@ -57,9 +65,13 @@ class ColorUtils
             }
         }
 
-        return [$h, $s, $v];
+        return [(int) $h, (int) $s, (int) $v];
     }
 
+    /**
+     * @param array{int, int, int} $hsv
+     * @return array{int, int, int}
+     */
     public static function hsvtorgb(array $hsv): array
     {
         $h = $hsv[0];
@@ -117,6 +129,6 @@ class ColorUtils
             }
         }
 
-        return [$r * 255, $g * 255, $b * 255];
+        return [(int) $r * 255, (int) $g * 255, (int) $b * 255];
     }
 }

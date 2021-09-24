@@ -4,14 +4,10 @@ namespace Soyhuce\DevTools\Debug\Warnings;
 
 class Warning
 {
-    private string $source;
-
-    private string $message;
-
-    public function __construct(string $source, string $content)
-    {
-        $this->source = $source;
-        $this->message = $content;
+    public function __construct(
+        private string $source,
+        private string $message,
+    ) {
     }
 
     public function __toString(): string

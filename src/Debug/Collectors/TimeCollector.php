@@ -11,14 +11,12 @@ use Soyhuce\DevTools\Debug\Warnings\ApplicationDurationExceeded;
  */
 class TimeCollector extends DataCollector
 {
-    private Application $app;
-
     /** @var array<string, \Soyhuce\DevTools\Debug\Entries\Measure> */
     private array $measures = [];
 
-    public function __construct(Application $app)
-    {
-        $this->app = $app;
+    public function __construct(
+        private Application $app,
+    ) {
     }
 
     public function getName(): string
