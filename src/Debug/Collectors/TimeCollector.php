@@ -7,7 +7,7 @@ use Soyhuce\DevTools\Debug\Entries\Measure;
 use Soyhuce\DevTools\Debug\Warnings\ApplicationDurationExceeded;
 
 /**
- * Class TimeCollector
+ * Class TimeCollector.
  */
 class TimeCollector extends DataCollector
 {
@@ -28,7 +28,7 @@ class TimeCollector extends DataCollector
 
     public function boot(): void
     {
-        $this->app->booted(function () {
+        $this->app->booted(function (): void {
             $startTime = $this->app['request']->server('REQUEST_TIME_FLOAT') ?? $this->app['request']->server('REQUEST_TIME');
             if ($startTime) {
                 $this->measures['Booting'] = new Measure($this->getName(), 'Booting', [microtime(true) - $startTime]);

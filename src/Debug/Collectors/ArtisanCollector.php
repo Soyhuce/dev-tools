@@ -24,7 +24,7 @@ class ArtisanCollector extends DataCollector
 
     public function boot(): void
     {
-        $this->events->listen(CommandStarting::class, function (CommandStarting $commandStarting) {
+        $this->events->listen(CommandStarting::class, function (CommandStarting $commandStarting): void {
             $this->entry = new Entry($this->getName(), (string) $commandStarting->input);
         });
     }

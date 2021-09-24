@@ -28,7 +28,7 @@ class RequestCollector extends DataCollector
         return [$this->entry];
     }
 
-    public function setRequest(Request $request)
+    public function setRequest(Request $request): void
     {
         $this->entry = new Entry(
             $this->getName(),

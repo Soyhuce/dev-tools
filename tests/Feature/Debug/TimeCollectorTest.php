@@ -5,9 +5,13 @@ namespace Soyhuce\DevTools\Test\Feature\Debug;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
+use LogicException;
 use Soyhuce\DevTools\Debug\Debug;
 use Soyhuce\DevTools\Test\TestCase;
 
+/**
+ * @coversNothing
+ */
 class TimeCollectorTest extends TestCase
 {
     protected function getEnvironmentSetUp($app): void
@@ -42,9 +46,9 @@ class TimeCollectorTest extends TestCase
     /**
      * @test
      */
-    public function timerCanBeUsedToHaveStatistics()
+    public function timerCanBeUsedToHaveStatistics(): void
     {
-        Collection::times(3, static function () {
+        Collection::times(3, static function (): void {
             Debug::startMeasure('foo');
             Debug::stopMeasure('foo');
         });
@@ -67,9 +71,9 @@ class TimeCollectorTest extends TestCase
     /**
      * @test
      */
-    public function timerCannotBeStartedTwice()
+    public function timerCannotBeStartedTwice(): void
     {
-        $this->expectException(\LogicException::class);
+        $this->expectException(LogicException::class);
         $this->expectErrorMessage('A measure foo is already started');
 
         Debug::startMeasure('foo');
@@ -79,9 +83,9 @@ class TimeCollectorTest extends TestCase
     /**
      * @test
      */
-    public function timerMustBeStartedBeforeStopped()
+    public function timerMustBeStartedBeforeStopped(): void
     {
-        $this->expectException(\LogicException::class);
+        $this->expectException(LogicException::class);
         $this->expectErrorMessage('A measure foo is not started');
 
         Debug::stopMeasure('foo');

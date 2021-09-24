@@ -8,7 +8,7 @@ class QueriesExceeded extends Warning
     {
         parent::__construct(
             $source,
-            "Number of queries exceeded max ${max} allowed : ${actual}"
+            "Number of queries exceeded max {$max} allowed : {$actual}"
         );
     }
 }

@@ -3,7 +3,7 @@
 namespace Soyhuce\DevTools\Debug\Collectors;
 
 /**
- * Class Collector
+ * Class Collector.
  */
 abstract class DataCollector
 {

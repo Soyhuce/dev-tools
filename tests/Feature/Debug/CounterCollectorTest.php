@@ -8,6 +8,9 @@ use Illuminate\Support\Str;
 use Soyhuce\DevTools\Debug\Debug;
 use Soyhuce\DevTools\Test\TestCase;
 
+/**
+ * @coversNothing
+ */
 class CounterCollectorTest extends TestCase
 {
     protected function getEnvironmentSetUp($app): void

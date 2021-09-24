@@ -5,6 +5,7 @@ namespace Soyhuce\DevTools\Debug\Entries;
 use LogicException;
 use Soyhuce\DevTools\Tools\Stats;
 use Soyhuce\DevTools\Tools\Time;
+use function count;
 
 class Measure extends Entry
 {

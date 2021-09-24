@@ -24,7 +24,7 @@ class MessageCollector extends DataCollector
         return $this->messages;
     }
 
-    public function addMessage(string $message)
+    public function addMessage(string $message): void
     {
         $this->messages[] = new Entry($this->getName(), $message);
     }

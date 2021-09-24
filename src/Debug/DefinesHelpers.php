@@ -7,8 +7,6 @@ use Symfony\Component\VarDumper\VarDumper;
 trait DefinesHelpers
 {
     /**
-     * @param string $name
-     * @param callable $callable
      * @return mixed
      */
     public function measuring(string $name, callable $callable)
