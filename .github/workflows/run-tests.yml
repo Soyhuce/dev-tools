@@ -38,7 +38,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" ${{ matrix.extra }} --no-interaction --no-update
+          composer require "laravel/framework:${{ matrix.laravel }}" --no-interaction --no-update --no-scripts
           composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-scripts
 
       - name: Execute tests
