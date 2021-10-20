@@ -44,9 +44,6 @@
             "providers": [
                 "Soyhuce\\DevTools\\ServiceProvider"
             ]
-        },
-        "branch-alias": {
-            "dev-main": "dev-master"
         }
     },
     "scripts": {
