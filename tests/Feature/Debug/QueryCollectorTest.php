@@ -39,4 +39,28 @@ class QueryCollectorTest extends TestCase
 
         Debug::log();
     }
+
+    /**
+     * @test
+     */
+    public function queriesAreCollectedWithDifferentKindsOfBindings(): void
+    {
+        User::query()
+            ->whereRaw('"string" = ?', ['taylor@laravel.com'])
+            ->whereRaw('"nullable" = ?', [null])
+            ->whereRaw('"bool" = ?', [true])
+            ->whereRaw('"float" = ?', [1.2])
+            ->whereRaw('"integer" = ?', [1])
+            ->first();
+
+        Log::shouldReceive('debug')
+            ->withArgs(static function (string $message) {
+                return Str::containsAll($message, [
+                    'database : select * from "users" where "string" = \'taylor@laravel.com\' and "nullable" = null and "bool" = 1 and "float" = 1.2 and "integer" = 1 limit 1 -> ',
+                    'database : query executed :',
+                ]);
+            });
+
+        Debug::log();
+    }
 }

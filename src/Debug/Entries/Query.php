@@ -4,6 +4,9 @@ namespace Soyhuce\DevTools\Debug\Entries;
 
 use Illuminate\Database\Events\QueryExecuted;
 use Soyhuce\DevTools\Tools\Time;
+use function is_bool;
+use function is_float;
+use function is_int;
 
 class Query extends Entry
 {
@@ -38,7 +41,18 @@ class Query extends Entry
             $regex = is_numeric($key)
                 ? "/\\?(?=(?:[^'\\\\']*'[^'\\\\']*')*[^'\\\\']*$)/"
                 : "/:{$key}(?=(?:[^'\\\\']*'[^'\\\\']*')*[^'\\\\']*$)/";
-            $query = (string) preg_replace($regex, $pdo->quote($binding), $query, 1);
+
+            if (is_bool($binding)) {
+                $binding = $binding ? 'true' : 'false';
+            } elseif ($binding === null) {
+                $binding = 'null';
+            } elseif (is_int($binding) || is_float($binding)) {
+                $binding = "{$binding}";
+            } else {
+                $binding = $pdo->quote($binding);
+            }
+
+            $query = preg_replace($regex, $binding, $query, 1);
         }
 
         return $query;
