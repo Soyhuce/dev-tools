@@ -25,7 +25,7 @@ All notable changes to `soyhuce/dev-tools` will be documented in this file
 - Nothing
 
 
-## [3.3.0] - YYYY-MM-DD
+## [3.3.0] - 2021-12-08
 
 ### Added
 
