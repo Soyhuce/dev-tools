@@ -6,15 +6,12 @@ All notable changes to `soyhuce/dev-tools` will be documented in this file
 
 ### Added
 
-- Phpstan analysis
+- Nothing
 
 ### Changed
 
-- Drop Laravel 7 support
-- Drop php 7.4 support
-- Upgrade dependencies
-- Use php 8.0 syntax
-
+- Nothing
+- 
 ### Deprecated
 
 - Nothing
@@ -26,6 +23,22 @@ All notable changes to `soyhuce/dev-tools` will be documented in this file
 ### Security
 
 - Nothing
+
+
+## [3.3.0] - YYYY-MM-DD
+
+### Added
+
+- Phpstan analysis
+- Php 8.1 support
+
+### Changed
+
+- Drop Laravel 7 support
+- Drop php 7.4 support
+- Upgrade dependencies
+- Use php 8.0 syntax
+- Improve Query collector log
 
 ## [3.2.0] - 2020-11-09
 
