@@ -3,7 +3,6 @@
 namespace Soyhuce\DevTools\Test;
 
 use Illuminate\Foundation\Auth\User;
-use Illuminate\Foundation\Testing\Concerns\InteractsWithDeprecationHandling;
 use Orchestra\Testbench\TestCase as Orchestra;
 
 /**
@@ -11,8 +10,6 @@ use Orchestra\Testbench\TestCase as Orchestra;
  */
 class TestCase extends Orchestra
 {
-    use InteractsWithDeprecationHandling;
-
     protected function getPackageProviders($app): array
     {
         return [\Soyhuce\DevTools\ServiceProvider::class];
