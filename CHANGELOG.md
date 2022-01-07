@@ -6,7 +6,7 @@ All notable changes to `soyhuce/dev-tools` will be documented in this file
 
 ### Added
 
-- Nothing
+- Support Laravel 9
 
 ### Changed
 
