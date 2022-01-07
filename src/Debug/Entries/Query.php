@@ -52,7 +52,7 @@ class Query extends Entry
                 $binding = $pdo->quote($binding);
             }
 
-            $query = preg_replace($regex, $binding, $query, 1);
+            $query = preg_replace($regex, $binding, $query, 1) ?? $query;
         }
 
         return $query;
