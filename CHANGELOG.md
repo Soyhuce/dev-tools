@@ -6,12 +6,12 @@ All notable changes to `soyhuce/dev-tools` will be documented in this file
 
 ### Added
 
-- Support Laravel 9
+- Nothing
 
 ### Changed
 
 - Nothing
-- 
+
 ### Deprecated
 
 - Nothing
@@ -24,6 +24,11 @@ All notable changes to `soyhuce/dev-tools` will be documented in this file
 
 - Nothing
 
+## [3.3.1] - 2021-01-07
+
+### Added
+
+- Support Laravel 9
 
 ## [3.3.0] - 2021-12-08
 
