@@ -6,6 +6,11 @@ parameters:
 			path: src/Debug/Collectors/ArtisanCollector.php
 
 		-
+			message: "#^Binary operation \"\\-\" between float and non\\-empty\\-array\\|non\\-empty\\-string results in an error\\.$#"
+			count: 1
+			path: src/Debug/Collectors/TimeCollector.php
+
+		-
 			message: "#^Call to an undefined method Soyhuce\\\\DevTools\\\\Debug\\\\Collectors\\\\DataCollector\\:\\:addMessage\\(\\)\\.$#"
 			count: 1
 			path: src/Debug/DebugManager.php
@@ -36,9 +41,14 @@ parameters:
 			path: src/Debug/DebugManager.php
 
 		-
-			message: "#^Array \\(array\\<float\\|int\\>\\) does not accept float\\|int\\|false\\.$#"
-			count: 2
-			path: src/Tools/Stats.php
+			message: "#^Unsafe access to private property Soyhuce\\\\DevTools\\\\Debug\\\\DebugManager\\:\\:\\$availableCollectors through static\\:\\:\\.$#"
+			count: 1
+			path: src/Debug/DebugManager.php
+
+		-
+			message: "#^Unsafe call to private method Soyhuce\\\\DevTools\\\\Faker\\\\Image\\:\\:generateRandomColor\\(\\) through static\\:\\:\\.$#"
+			count: 1
+			path: src/Faker/Image.php
 
 		-
 			message: "#^Method Soyhuce\\\\DevTools\\\\Tools\\\\Stats\\:\\:max\\(\\) should return float\\|int but returns float\\|int\\|false\\.$#"
@@ -48,5 +58,10 @@ parameters:
 		-
 			message: "#^Method Soyhuce\\\\DevTools\\\\Tools\\\\Stats\\:\\:min\\(\\) should return float\\|int but returns float\\|int\\|false\\.$#"
 			count: 1
+			path: src/Tools/Stats.php
+
+		-
+			message: "#^Property Soyhuce\\\\DevTools\\\\Tools\\\\Stats\\:\\:\\$cache \\(array\\<float\\|int\\>\\) does not accept array\\<bool\\|float\\|int\\>\\.$#"
+			count: 2
 			path: src/Tools/Stats.php
 
