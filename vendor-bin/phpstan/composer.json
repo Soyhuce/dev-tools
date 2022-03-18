@@ -6,6 +6,6 @@
   "minimum-stability": "dev",
   "prefer-stable": true,
   "require-dev": {
-    "nunomaduro/larastan": "^0.7.6"
+    "nunomaduro/larastan": "^2.0"
   }
 }
