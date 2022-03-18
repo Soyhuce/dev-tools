@@ -10,6 +10,10 @@ class ColorUtils
      */
     public static function getComplementaryColor(array $rgb): array
     {
+        if ($rgb === [255, 255, 255]) {
+            return [0, 0, 0];
+        }
+
         $hsv = static::rgbtohsv($rgb);
 
         [$h, $s, $v] = $hsv;
