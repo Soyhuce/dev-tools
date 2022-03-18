@@ -24,7 +24,13 @@ All notable changes to `soyhuce/dev-tools` will be documented in this file
 
 - Nothing
 
-## [3.3.1] - 2021-01-07
+## [3.3.2] - 2022-03-18
+
+### Fixed
+
+- Fixed ColorUtils::getComplementaryColor for white (`[255,255,255]`)
+
+## [3.3.1] - 2022-01-07
 
 ### Added
 
