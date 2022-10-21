@@ -39,6 +39,10 @@ jobs:
           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick
           coverage: none
 
+      - name: Set Minimum PHP 8.1 Versions
+        run: |
+          composer require ramsey/collection:^1.2 brick/math:^0.9.3 --no-interaction --no-update
+
       - name: Install dependencies
         run: |
           composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update --no-scripts
