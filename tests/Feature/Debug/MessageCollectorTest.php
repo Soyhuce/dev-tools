@@ -28,11 +28,14 @@ class MessageCollectorTest extends TestCase
     {
         Debug::message('Foo');
 
-        Log::shouldReceive('debug')
+        $log = Log::shouldReceive('debug')
             ->withArgs(static function (string $message) {
                 return Str::contains($message, 'message : Foo');
             });
 
         Debug::log();
+
+        $log->verify();
+        $this->addToAssertionCount(1);
     }
 }

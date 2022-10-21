@@ -29,12 +29,15 @@ class CounterCollectorTest extends TestCase
     {
         Debug::incrementCounter('foo');
 
-        Log::shouldReceive('debug')
+        $log = Log::shouldReceive('debug')
             ->withArgs(static function (string $message) {
                 return Str::contains($message, 'counter : foo -> 1');
             });
 
         Debug::log();
+
+        $log->verify();
+        $this->addToAssertionCount(1);
     }
 
     /**
@@ -44,11 +47,14 @@ class CounterCollectorTest extends TestCase
     {
         Collection::times(15, static fn () => Debug::incrementCounter('foo', 2));
 
-        Log::shouldReceive('debug')
+        $log = Log::shouldReceive('debug')
             ->withArgs(static function (string $message) {
                 return Str::contains($message, 'counter : foo -> 30');
             });
 
         Debug::log();
+
+        $log->verify();
+        $this->addToAssertionCount(1);
     }
 }

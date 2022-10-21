@@ -6,7 +6,7 @@ parameters:
 			path: src/Debug/Collectors/ArtisanCollector.php
 
 		-
-			message: "#^Binary operation \"\\-\" between float and non\\-empty\\-array\\|non\\-empty\\-string results in an error\\.$#"
+			message: "#^Binary operation \"\\-\" between float and non\\-empty\\-array\\|non\\-falsy\\-string results in an error\\.$#"
 			count: 1
 			path: src/Debug/Collectors/TimeCollector.php
 
