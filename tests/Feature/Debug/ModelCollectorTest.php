@@ -38,11 +38,14 @@ class ModelCollectorTest extends TestCase
         User::query()->where('email', 'john.doe@email.com')->first();
         User::all();
 
-        Log::shouldReceive('debug')
+        $log = Log::shouldReceive('debug')
             ->withArgs(static function (string $message) {
                 return Str::contains($message, 'model : Illuminate\Foundation\Auth\User -> 2');
             });
 
         Debug::log();
+
+        $log->verify();
+        $this->addToAssertionCount(1);
     }
 }

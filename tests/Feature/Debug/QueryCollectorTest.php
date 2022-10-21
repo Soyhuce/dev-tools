@@ -29,7 +29,7 @@ class QueryCollectorTest extends TestCase
     {
         User::query()->where('email', 'taylor@laravel.com')->first();
 
-        Log::shouldReceive('debug')
+        $log = Log::shouldReceive('debug')
             ->withArgs(static function (string $message) {
                 return Str::containsAll($message, [
                     'database : select * from "users" where "email" = \'taylor@laravel.com\' limit 1 -> ',
@@ -38,6 +38,9 @@ class QueryCollectorTest extends TestCase
             });
 
         Debug::log();
+
+        $log->verify();
+        $this->addToAssertionCount(1);
     }
 
     /**
@@ -53,7 +56,7 @@ class QueryCollectorTest extends TestCase
             ->whereRaw('"integer" = ?', [1])
             ->first();
 
-        Log::shouldReceive('debug')
+        $log = Log::shouldReceive('debug')
             ->withArgs(static function (string $message) {
                 return Str::containsAll($message, [
                     'database : select * from "users" where "string" = \'taylor@laravel.com\' and "nullable" = null and "bool" = 1 and "float" = 1.2 and "integer" = 1 limit 1 -> ',
@@ -62,5 +65,8 @@ class QueryCollectorTest extends TestCase
             });
 
         Debug::log();
+
+        $log->verify();
+        $this->addToAssertionCount(1);
     }
 }

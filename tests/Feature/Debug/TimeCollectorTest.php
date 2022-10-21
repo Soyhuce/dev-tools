@@ -31,7 +31,7 @@ class TimeCollectorTest extends TestCase
         Debug::startMeasure('foo');
         Debug::stopMeasure('foo');
 
-        Log::shouldReceive('debug')
+        $log = Log::shouldReceive('debug')
             ->withArgs(static function (string $message) {
                 return Str::containsAll($message, [
                     'time : Booting -> ',
@@ -41,6 +41,9 @@ class TimeCollectorTest extends TestCase
             });
 
         Debug::log();
+
+        $log->verify();
+        $this->addToAssertionCount(1);
     }
 
     /**
@@ -53,7 +56,7 @@ class TimeCollectorTest extends TestCase
             Debug::stopMeasure('foo');
         });
 
-        Log::shouldReceive('debug')
+        $log = Log::shouldReceive('debug')
             ->withArgs(static function (string $message) {
                 return Str::containsAll($message, [
                     'time : foo -> ',
@@ -66,6 +69,9 @@ class TimeCollectorTest extends TestCase
             });
 
         Debug::log();
+
+        $log->verify();
+        $this->addToAssertionCount(1);
     }
 
     /**

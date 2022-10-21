@@ -26,11 +26,14 @@ class MemoryCollectorTest extends TestCase
      */
     public function memoryIsCollected(): void
     {
-        Log::shouldReceive('debug')
+        $log = Log::shouldReceive('debug')
             ->withArgs(static function (string $message) {
                 return Str::contains($message, 'memory : ');
             });
 
         Debug::log();
+
+        $log->verify();
+        $this->addToAssertionCount(1);
     }
 }

@@ -28,12 +28,15 @@ class ArtisanCollectorTest extends TestCase
     {
         $this->artisan('list');
 
-        Log::shouldReceive('debug')
+        $log = Log::shouldReceive('debug')
             ->withArgs(static function (string $message) {
                 return Str::contains($message, 'artisan : list');
             });
 
         Debug::log();
+
+        $log->verify();
+        $this->addToAssertionCount(1);
     }
 
     /**
@@ -43,11 +46,14 @@ class ArtisanCollectorTest extends TestCase
     {
         $this->artisan('list --format=md make');
 
-        Log::shouldReceive('debug')
+        $log = Log::shouldReceive('debug')
             ->withArgs(static function (string $message) {
                 return Str::contains($message, 'artisan : list --format=md make');
             });
 
         Debug::log();
+
+        $log->verify();
+        $this->addToAssertionCount(1);
     }
 }
