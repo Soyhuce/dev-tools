@@ -16,13 +16,14 @@
     ],
     "require": {
         "php": "^8.1",
-        "illuminate/http": "^9.0",
-        "illuminate/support": "^9.0"
+        "illuminate/http": "^9.0 || ^10.0",
+        "illuminate/support": "^9.0 || ^10.0"
     },
     "require-dev": {
-        "bamarni/composer-bin-plugin": "^1.4",
+        "friendsofphp/php-cs-fixer": "^3.13",
         "intervention/image": "^2.5.0",
-        "orchestra/testbench": "^7.0",
+        "nunomaduro/larastan": "^2.3",
+        "orchestra/testbench": "^7.0 || ^8.0",
         "phpunit/phpunit": "^9.5"
     },
     "suggest": {
@@ -46,8 +47,6 @@
         }
     },
     "scripts": {
-        "post-install-cmd": "@composer bin all install --ansi",
-        "post-update-cmd": "@composer bin all update --ansi",
         "cs": "vendor/bin/php-cs-fixer fix",
         "test": "vendor/bin/phpunit --config=phpunit.xml",
         "analyse": "vendor/bin/phpstan analyse",
@@ -61,9 +60,6 @@
     "prefer-stable": true,
     "config": {
         "preferred-install": "dist",
-        "sort-packages": true,
-        "allow-plugins": {
-            "bamarni/composer-bin-plugin": true
-        }
+        "sort-packages": true
     }
 }
