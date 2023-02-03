@@ -50,18 +50,3 @@ parameters:
 			count: 1
 			path: src/Faker/Image.php
 
-		-
-			message: "#^Method Soyhuce\\\\DevTools\\\\Tools\\\\Stats\\:\\:max\\(\\) should return float\\|int but returns float\\|int\\|false\\.$#"
-			count: 1
-			path: src/Tools/Stats.php
-
-		-
-			message: "#^Method Soyhuce\\\\DevTools\\\\Tools\\\\Stats\\:\\:min\\(\\) should return float\\|int but returns float\\|int\\|false\\.$#"
-			count: 1
-			path: src/Tools/Stats.php
-
-		-
-			message: "#^Property Soyhuce\\\\DevTools\\\\Tools\\\\Stats\\:\\:\\$cache \\(array\\<float\\|int\\>\\) does not accept array\\<bool\\|float\\|int\\>\\.$#"
-			count: 2
-			path: src/Tools/Stats.php
-
