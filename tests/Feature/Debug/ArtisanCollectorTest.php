@@ -2,10 +2,14 @@
 
 namespace Soyhuce\DevTools\Test\Feature\Debug;
 
+use Illuminate\Console\Events\CommandStarting;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Soyhuce\DevTools\Debug\Debug;
 use Soyhuce\DevTools\Test\TestCase;
+use Symfony\Component\Console\Input\ArrayInput;
+use Symfony\Component\Console\Output\NullOutput;
 
 /**
  * @coversNothing
@@ -26,7 +30,11 @@ class ArtisanCollectorTest extends TestCase
      */
     public function artisanCommandIsCollected(): void
     {
-        $this->artisan('list');
+        Event::dispatch(new CommandStarting(
+            'list',
+            new ArrayInput(['command' => 'list']),
+            new NullOutput()
+        ));
 
         $log = Log::shouldReceive('debug')
             ->withArgs(static function (string $message) {
@@ -44,7 +52,11 @@ class ArtisanCollectorTest extends TestCase
      */
     public function artisanArgumentsAreCollected(): void
     {
-        $this->artisan('list --format=md make');
+        Event::dispatch(new CommandStarting(
+            'list',
+            new ArrayInput(['command' => 'list', '--format' => 'md', 'namespace' => 'make']),
+            new NullOutput()
+        ));
 
         $log = Log::shouldReceive('debug')
             ->withArgs(static function (string $message) {
