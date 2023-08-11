@@ -3,11 +3,7 @@
 namespace Soyhuce\DevTools\Debug\Entries;
 
 use Illuminate\Database\Events\QueryExecuted;
-use Illuminate\Support\Facades\DB;
 use Soyhuce\DevTools\Tools\Time;
-use function is_bool;
-use function is_float;
-use function is_int;
 
 class Query extends Entry
 {
@@ -35,7 +31,8 @@ class Query extends Entry
         $grammar = $connection->getQueryGrammar();
 
         return $grammar->substituteBindingsIntoRawSql(
-            $queryExecuted->sql, $connection->prepareBindings($queryExecuted->bindings)
+            $queryExecuted->sql,
+            $connection->prepareBindings($queryExecuted->bindings)
         );
     }
 
