@@ -3,6 +3,7 @@
 namespace Soyhuce\DevTools\Test\Feature\Debug;
 
 use Illuminate\Foundation\Auth\User;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Soyhuce\DevTools\Debug\Debug;
@@ -33,6 +34,29 @@ class QueryCollectorTest extends TestCase
             ->withArgs(static function (string $message) {
                 return Str::containsAll($message, [
                     'database : select * from "users" where "email" = \'taylor@laravel.com\' limit 1 -> ',
+                    'database : query executed :',
+                ]);
+            });
+
+        Debug::log();
+
+        $log->verify();
+        $this->addToAssertionCount(1);
+    }
+
+    /**
+     * @test
+     */
+    public function queriesAreCollectedWithUpdates(): void
+    {
+        Date::setTestNow('2023-08-11 11:17:52');
+
+        User::query()->where('email', 'taylor@laravel.com')->update(['name' => 'Taylor']);
+
+        $log = Log::shouldReceive('debug')
+            ->withArgs(static function (string $message) {
+                return Str::containsAll($message, [
+                    'database : update "users" set "name" = \'Taylor\', "updated_at" = \'2023-08-11 11:17:52\' where "email" = \'taylor@laravel.com\' -> ',
                     'database : query executed :',
                 ]);
             });
