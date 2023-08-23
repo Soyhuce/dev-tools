@@ -35,6 +35,7 @@ class QueryCollectorTest extends TestCase
                 return Str::containsAll($message, [
                     'database : select * from "users" where "email" = \'taylor@laravel.com\' limit 1 -> ',
                     'database : query executed :',
+                    'select :',
                 ]);
             });
 

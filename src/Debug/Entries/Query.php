@@ -7,8 +7,15 @@ use Soyhuce\DevTools\Tools\Time;
 
 class Query extends Entry
 {
+    public readonly string $sql;
+
+    public readonly float $duration;
+
     public function __construct(string $source, QueryExecuted $queryExecuted)
     {
+        $this->sql = $this->toReadableSql($queryExecuted);
+        $this->duration = $queryExecuted->time;
+
         parent::__construct(
             $source,
             $this->format($queryExecuted)
@@ -20,8 +27,8 @@ class Query extends Entry
     {
         return sprintf(
             '%s -> %s',
-            $this->toReadableSql($queryExecuted),
-            Time::humanizeMilliseconds($queryExecuted->time)
+            $this->sql,
+            Time::humanizeMilliseconds($this->duration)
         );
     }
 
