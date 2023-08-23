@@ -80,7 +80,7 @@ class TimeCollectorTest extends TestCase
     public function timerCannotBeStartedTwice(): void
     {
         $this->expectException(LogicException::class);
-        $this->expectErrorMessage('A measure foo is already started');
+        $this->expectExceptionMessage('A measure foo is already started');
 
         Debug::startMeasure('foo');
         Debug::startMeasure('foo');
@@ -92,7 +92,7 @@ class TimeCollectorTest extends TestCase
     public function timerMustBeStartedBeforeStopped(): void
     {
         $this->expectException(LogicException::class);
-        $this->expectErrorMessage('A measure foo is not started');
+        $this->expectExceptionMessage('A measure foo is not started');
 
         Debug::stopMeasure('foo');
     }
