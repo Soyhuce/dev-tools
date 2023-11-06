@@ -41,7 +41,7 @@ class DebugManager
     private bool $booted = false;
 
     public function __construct(
-        private Application $app,
+        private readonly Application $app,
     ) {
     }
 
@@ -111,9 +111,7 @@ class DebugManager
     private function entries(): Collection
     {
         return collect($this->collectors)
-            ->flatMap(static function (DataCollector $collector) {
-                return $collector->collect();
-            })
+            ->flatMap(static fn (DataCollector $collector) => $collector->collect())
             ->sortBy(static fn (Entry $entry) => $entry->getMicroTime())
             ->map(static fn (Entry $entry) => (string) $entry);
     }
@@ -124,9 +122,7 @@ class DebugManager
     private function warnings(): Collection
     {
         $warnings = collect($this->collectors)
-            ->flatMap(static function (DataCollector $collector) {
-                return $collector->warnings();
-            })
+            ->flatMap(static fn (DataCollector $collector) => $collector->warnings())
             ->map(static fn (Warning $warning) => (string) $warning);
 
         if ($warnings->isEmpty()) {
@@ -136,13 +132,11 @@ class DebugManager
         $maxLength = (int) $warnings->max(static fn (string $warning) => Str::length($warning));
 
         return $warnings
-            ->map(static function (string $warning) use ($maxLength) {
-                return sprintf(
-                    '!! %s%s !!',
-                    $warning,
-                    str_repeat(' ', $maxLength - Str::length($warning))
-                );
-            })
+            ->map(static fn (string $warning) => sprintf(
+                '!! %s%s !!',
+                $warning,
+                str_repeat(' ', $maxLength - Str::length($warning))
+            ))
             ->prepend(str_repeat('!', $maxLength + 6))
             ->push(str_repeat('!', $maxLength + 6));
     }

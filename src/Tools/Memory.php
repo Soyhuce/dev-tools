@@ -26,18 +26,12 @@ class Memory
         }
 
         $number = (int) mb_substr($value, 0, -2);
-        switch (mb_strtoupper(mb_substr($value, -2))) {
-            case 'KB':
-            case 'KO':
-                return $number * 1024;
-            case 'MB':
-            case 'MO':
-                return $number * 1024 ** 2;
-            case 'GB':
-            case 'GO':
-                return $number * 1024 ** 3;
-            default:
-                return $number;
-        }
+
+        return match (mb_strtoupper(mb_substr($value, -2))) {
+            'KB', 'KO' => $number * 1024,
+            'MB', 'MO' => $number * 1024 ** 2,
+            'GB', 'GO' => $number * 1024 ** 3,
+            default => $number,
+        };
     }
 }

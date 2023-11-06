@@ -15,14 +15,14 @@ class Image
         ?string $text = null,
         string $encoding = 'jpg',
     ): InterventionImage {
-        if (!class_exists('Intervention\Image\Image')) {
+        if (!class_exists(\Intervention\Image\Image::class)) {
             throw new Exception('package intervention/image is required to use Image::generate');
         }
 
         $backgroundColor = static::generateRandomColor();
         $fontColor = ColorUtils::getComplementaryColor($backgroundColor);
         $img = ImageManagerStatic::canvas($width, $height, $backgroundColor);
-        $text = $text ?? $width . 'x' . $height;
+        $text ??= $width . 'x' . $height;
         $fontSize = (int) ($width / mb_strlen($text));
 
         $img->text(
@@ -48,6 +48,6 @@ class Image
      */
     private static function generateRandomColor(): array
     {
-        return [mt_rand(0, 255), mt_rand(0, 255), mt_rand(0, 255)];
+        return [random_int(0, 255), random_int(0, 255), random_int(0, 255)];
     }
 }

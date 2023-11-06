@@ -29,9 +29,7 @@ class MessageCollectorTest extends TestCase
         Debug::message('Foo');
 
         $log = Log::shouldReceive('debug')
-            ->withArgs(static function (string $message) {
-                return Str::contains($message, 'message : Foo');
-            });
+            ->withArgs(static fn (string $message) => Str::contains($message, 'message : Foo'));
 
         Debug::log();
 

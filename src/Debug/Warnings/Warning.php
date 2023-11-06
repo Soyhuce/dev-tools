@@ -2,11 +2,13 @@
 
 namespace Soyhuce\DevTools\Debug\Warnings;
 
-class Warning
+use Stringable;
+
+class Warning implements Stringable
 {
     public function __construct(
-        private string $source,
-        private string $message,
+        private readonly string $source,
+        private readonly string $message,
     ) {
     }
 

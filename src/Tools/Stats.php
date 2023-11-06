@@ -13,7 +13,7 @@ class Stats
      * @param array<float|int> $series
      */
     public function __construct(
-        private array $series,
+        private readonly array $series,
     ) {
     }
 
