@@ -31,13 +31,11 @@ class QueryCollectorTest extends TestCase
         User::query()->where('email', 'taylor@laravel.com')->first();
 
         $log = Log::shouldReceive('debug')
-            ->withArgs(static function (string $message) {
-                return Str::containsAll($message, [
-                    'database : select * from "users" where "email" = \'taylor@laravel.com\' limit 1 -> ',
-                    'database : query executed :',
-                    'select :',
-                ]);
-            });
+            ->withArgs(static fn (string $message) => Str::containsAll($message, [
+                'database : select * from "users" where "email" = \'taylor@laravel.com\' limit 1 -> ',
+                'database : query executed :',
+                'select :',
+            ]));
 
         Debug::log();
 
@@ -55,12 +53,10 @@ class QueryCollectorTest extends TestCase
         User::query()->where('email', 'taylor@laravel.com')->update(['name' => 'Taylor']);
 
         $log = Log::shouldReceive('debug')
-            ->withArgs(static function (string $message) {
-                return Str::containsAll($message, [
-                    'database : update "users" set "name" = \'Taylor\', "updated_at" = \'2023-08-11 11:17:52\' where "email" = \'taylor@laravel.com\' -> ',
-                    'database : query executed :',
-                ]);
-            });
+            ->withArgs(static fn (string $message) => Str::containsAll($message, [
+                'database : update "users" set "name" = \'Taylor\', "updated_at" = \'2023-08-11 11:17:52\' where "email" = \'taylor@laravel.com\' -> ',
+                'database : query executed :',
+            ]));
 
         Debug::log();
 
@@ -82,12 +78,10 @@ class QueryCollectorTest extends TestCase
             ->first();
 
         $log = Log::shouldReceive('debug')
-            ->withArgs(static function (string $message) {
-                return Str::containsAll($message, [
-                    'database : select * from "users" where "string" = \'taylor@laravel.com\' and "nullable" = null and "bool" = 1 and "float" = 1.2 and "integer" = 1 limit 1 -> ',
-                    'database : query executed :',
-                ]);
-            });
+            ->withArgs(static fn (string $message) => Str::containsAll($message, [
+                'database : select * from "users" where "string" = \'taylor@laravel.com\' and "nullable" = null and "bool" = 1 and "float" = 1.2 and "integer" = 1 limit 1 -> ',
+                'database : query executed :',
+            ]));
 
         Debug::log();
 

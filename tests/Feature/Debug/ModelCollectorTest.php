@@ -39,9 +39,7 @@ class ModelCollectorTest extends TestCase
         User::all();
 
         $log = Log::shouldReceive('debug')
-            ->withArgs(static function (string $message) {
-                return Str::contains($message, 'model : Illuminate\Foundation\Auth\User -> 2');
-            });
+            ->withArgs(static fn (string $message) => Str::contains($message, 'model : Illuminate\Foundation\Auth\User -> 2'));
 
         Debug::log();
 

@@ -32,13 +32,11 @@ class TimeCollectorTest extends TestCase
         Debug::stopMeasure('foo');
 
         $log = Log::shouldReceive('debug')
-            ->withArgs(static function (string $message) {
-                return Str::containsAll($message, [
-                    'time : Booting -> ',
-                    'time : foo -> ',
-                    'time : Application -> ',
-                ]);
-            });
+            ->withArgs(static fn (string $message) => Str::containsAll($message, [
+                'time : Booting -> ',
+                'time : foo -> ',
+                'time : Application -> ',
+            ]));
 
         Debug::log();
 
@@ -57,16 +55,14 @@ class TimeCollectorTest extends TestCase
         });
 
         $log = Log::shouldReceive('debug')
-            ->withArgs(static function (string $message) {
-                return Str::containsAll($message, [
-                    'time : foo -> ',
-                    'cumulated on 3 entries',
-                    'avg',
-                    'min',
-                    'max',
-                    'std',
-                ]);
-            });
+            ->withArgs(static fn (string $message) => Str::containsAll($message, [
+                'time : foo -> ',
+                'cumulated on 3 entries',
+                'avg',
+                'min',
+                'max',
+                'std',
+            ]));
 
         Debug::log();
 

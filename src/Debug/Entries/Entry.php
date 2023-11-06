@@ -3,8 +3,9 @@
 namespace Soyhuce\DevTools\Debug\Entries;
 
 use Illuminate\Support\Carbon;
+use Stringable;
 
-class Entry
+class Entry implements Stringable
 {
     protected float $microTime;
 

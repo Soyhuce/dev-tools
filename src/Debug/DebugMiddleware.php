@@ -7,11 +7,8 @@ use Illuminate\Testing\TestResponse;
 
 class DebugMiddleware
 {
-    protected DebugManager $debugManager;
-
-    public function __construct(DebugManager $debugManager)
+    public function __construct(protected DebugManager $debugManager)
     {
-        $this->debugManager = $debugManager;
     }
 
     /**
