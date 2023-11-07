@@ -7,8 +7,8 @@ use Stringable;
 class Warning implements Stringable
 {
     public function __construct(
-        private readonly string $source,
-        private readonly string $message,
+        private string $source,
+        private string $message,
     ) {
     }
 

@@ -41,7 +41,7 @@ class DebugManager
     private bool $booted = false;
 
     public function __construct(
-        private readonly Application $app,
+        private Application $app,
     ) {
     }
 

@@ -37,7 +37,9 @@ class ArtisanCollectorTest extends TestCase
         ));
 
         $log = Log::shouldReceive('debug')
-            ->withArgs(static fn (string $message) => Str::contains($message, 'artisan : list'));
+            ->withArgs(static function (string $message) {
+                return Str::contains($message, 'artisan : list');
+            });
 
         Debug::log();
 
@@ -57,7 +59,9 @@ class ArtisanCollectorTest extends TestCase
         ));
 
         $log = Log::shouldReceive('debug')
-            ->withArgs(static fn (string $message) => Str::contains($message, 'artisan : list --format=md make'));
+            ->withArgs(static function (string $message) {
+                return Str::contains($message, 'artisan : list --format=md make');
+            });
 
         Debug::log();
 

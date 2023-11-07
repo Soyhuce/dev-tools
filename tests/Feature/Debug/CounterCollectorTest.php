@@ -30,7 +30,9 @@ class CounterCollectorTest extends TestCase
         Debug::incrementCounter('foo');
 
         $log = Log::shouldReceive('debug')
-            ->withArgs(static fn (string $message) => Str::contains($message, 'counter : foo -> 1'));
+            ->withArgs(static function (string $message) {
+                return Str::contains($message, 'counter : foo -> 1');
+            });
 
         Debug::log();
 
@@ -46,7 +48,9 @@ class CounterCollectorTest extends TestCase
         Collection::times(15, static fn () => Debug::incrementCounter('foo', 2));
 
         $log = Log::shouldReceive('debug')
-            ->withArgs(static fn (string $message) => Str::contains($message, 'counter : foo -> 30'));
+            ->withArgs(static function (string $message) {
+                return Str::contains($message, 'counter : foo -> 30');
+            });
 
         Debug::log();
 
