@@ -11,7 +11,7 @@ class ArtisanCollector extends DataCollector
     private ?Entry $entry = null;
 
     public function __construct(
-        private readonly Dispatcher $events,
+        private Dispatcher $events,
     ) {
     }
 

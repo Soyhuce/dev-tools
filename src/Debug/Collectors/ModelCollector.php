@@ -9,7 +9,7 @@ use function count;
 class ModelCollector extends CounterCollector
 {
     public function __construct(
-        private readonly Dispatcher $events,
+        private Dispatcher $events,
     ) {
     }
 
