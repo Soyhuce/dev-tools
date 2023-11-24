@@ -7,8 +7,9 @@ use Illuminate\Testing\TestResponse;
 
 class DebugMiddleware
 {
-    public function __construct(protected DebugManager $debugManager)
-    {
+    public function __construct(
+        protected DebugManager $debugManager,
+    ) {
     }
 
     /**
