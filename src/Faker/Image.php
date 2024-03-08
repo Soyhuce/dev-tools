@@ -15,7 +15,7 @@ class Image
         ?string $text = null,
         string $encoding = 'jpg',
     ): InterventionImage {
-        if (!class_exists(\Intervention\Image\Image::class)) {
+        if (!class_exists(InterventionImage::class)) {
             throw new Exception('package intervention/image is required to use Image::generate');
         }
 
