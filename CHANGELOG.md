@@ -2,6 +2,14 @@
 
 All notable changes to `soyhuce/dev-tools` will be documented in this file
 
+## 3.9.0 - 2024-03-08
+
+### What's Changed
+
+* Laravel 11 support by @EdenMl in https://github.com/Soyhuce/dev-tools/pull/23
+
+**Full Changelog**: https://github.com/Soyhuce/dev-tools/compare/3.8.0...3.9.0
+
 ## [3.3.2] - 2022-03-18
 
 ### Fixed
@@ -38,12 +46,14 @@ All notable changes to `soyhuce/dev-tools` will be documented in this file
 ## [3.1.0] - 2020-08-27
 
 ### Changed
+
 - Drop Laravel 6 support
 - Add Laravel 8 support
 
 ## [3.0.1] - 2020-06-25
 
 ### Fixed
+
 - Fix issue when following redirect into tests (bc191b4cd8fc44b0885e48807e65107a87a93d2b)
 
 ## [3.0.0] - 2020-06-11
@@ -58,8 +68,8 @@ All notable changes to `soyhuce/dev-tools` will be documented in this file
 
 ### Changed
 
-- Debug does not need anymore to be handled manually outside of an HTTP context. 
-- Time measures having same name are consolidated to provide statistics on durations. 
+- Debug does not need anymore to be handled manually outside of an HTTP context.
+- Time measures having same name are consolidated to provide statistics on durations.
 
 ### Fixed
 
