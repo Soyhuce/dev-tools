@@ -2,28 +2,6 @@
 
 All notable changes to `soyhuce/dev-tools` will be documented in this file
 
-## [Next release] - YYYY-MM-DD
-
-### Added
-
-- Nothing
-
-### Changed
-
-- Nothing
-
-### Deprecated
-
-- Nothing
-
-### Fixed
-
-- Nothing
-
-### Security
-
-- Nothing
-
 ## [3.3.2] - 2022-03-18
 
 ### Fixed
