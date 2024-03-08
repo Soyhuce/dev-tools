@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static mixed measuring(string $name, callable $callable)
  * @method static void dd(...$vars)
  *
- * @see \Soyhuce\DevTools\Debug\DebugManager
+ * @see DebugManager
  */
 class Debug extends Facade
 {
