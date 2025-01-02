@@ -2,6 +2,14 @@
 
 All notable changes to `soyhuce/dev-tools` will be documented in this file
 
+## 4.0.0 - 2025-01-02
+
+### What's Changed
+
+* Upgrade dependencies and php 8.4 by @bastien-phi in https://github.com/Soyhuce/dev-tools/pull/24
+
+**Full Changelog**: https://github.com/Soyhuce/dev-tools/compare/3.9.0...4.0.0
+
 ## 3.9.0 - 2024-03-08
 
 ### What's Changed
