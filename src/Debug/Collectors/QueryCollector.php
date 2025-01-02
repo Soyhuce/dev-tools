@@ -11,10 +11,11 @@ use Soyhuce\DevTools\Debug\Warnings\QueriesExceeded;
 use Soyhuce\DevTools\Tools\Stats;
 use Soyhuce\DevTools\Tools\Time;
 use function count;
+use function sprintf;
 
 class QueryCollector extends DataCollector
 {
-    /** @var Collection<int, \Soyhuce\DevTools\Debug\Entries\Query> */
+    /** @var Collection<int, Query> */
     private Collection $queries;
 
     /**
@@ -92,7 +93,7 @@ class QueryCollector extends DataCollector
     }
 
     /**
-     * @param Collection<int, \Soyhuce\DevTools\Debug\Entries\Query> $queries
+     * @param Collection<int, Query> $queries
      */
     public function subStatistics(Collection $queries): string
     {

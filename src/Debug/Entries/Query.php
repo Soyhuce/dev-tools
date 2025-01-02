@@ -4,6 +4,7 @@ namespace Soyhuce\DevTools\Debug\Entries;
 
 use Illuminate\Database\Events\QueryExecuted;
 use Soyhuce\DevTools\Tools\Time;
+use function sprintf;
 
 class Query extends Entry
 {

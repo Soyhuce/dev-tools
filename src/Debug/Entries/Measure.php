@@ -6,6 +6,7 @@ use LogicException;
 use Soyhuce\DevTools\Tools\Stats;
 use Soyhuce\DevTools\Tools\Time;
 use function count;
+use function sprintf;
 
 class Measure extends Entry
 {

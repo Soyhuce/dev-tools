@@ -6,7 +6,7 @@ use Soyhuce\DevTools\Debug\Entries\Counter;
 
 class CounterCollector extends DataCollector
 {
-    /** @var array<string, \Soyhuce\DevTools\Debug\Entries\Counter> */
+    /** @var array<string, Counter> */
     private array $counters = [];
 
     public function getName(): string

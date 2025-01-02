@@ -5,6 +5,7 @@ namespace Soyhuce\DevTools\Faker;
 use Exception;
 use Intervention\Image\Image as InterventionImage;
 use Intervention\Image\ImageManager;
+use Intervention\Image\Interfaces\ImageInterface;
 use Intervention\Image\Typography\FontFactory;
 
 class Image
@@ -14,14 +15,14 @@ class Image
         int $height = 640,
         ?string $text = null,
         string $encoding = 'jpg',
-    ): InterventionImage {
+    ): ImageInterface {
         if (!class_exists(InterventionImage::class)) {
             throw new Exception('package intervention/image is required to use Image::generate');
         }
 
-        $backgroundColor = static::generateRandomColor();
+        $backgroundColor = self::generateRandomColor();
         $fontColor = ColorUtils::getComplementaryColor($backgroundColor);
-        $img = ImageManager::create($width, $height)->fill($backgroundColor);
+        $img = ImageManager::imagick()->create($width, $height)->fill($backgroundColor);
         $text ??= $width . 'x' . $height;
         $fontSize = (int) ($width / mb_strlen($text));
 

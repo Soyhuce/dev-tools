@@ -27,7 +27,7 @@ class DebugMiddleware
 
     /**
      * @param \Illuminate\Http\Request $request
-     * @param \Symfony\Component\HttpFoundation\Response|TestResponse $response
+     * @param \Symfony\Component\HttpFoundation\Response|TestResponse<\Symfony\Component\HttpFoundation\Response> $response
      */
     public function terminate($request, $response): void
     {
