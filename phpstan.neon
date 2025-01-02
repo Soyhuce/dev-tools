@@ -11,6 +11,3 @@ parameters:
   level: 8
 
   ignoreErrors:
-
-  checkMissingIterableValueType: true
-  checkGenericClassInNonGenericObjectType: false
