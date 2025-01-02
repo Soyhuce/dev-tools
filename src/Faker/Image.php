@@ -3,9 +3,9 @@
 namespace Soyhuce\DevTools\Faker;
 
 use Exception;
-use Intervention\Image\AbstractFont;
 use Intervention\Image\Image as InterventionImage;
-use Intervention\Image\ImageManagerStatic;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Typography\FontFactory;
 
 class Image
 {
@@ -21,7 +21,7 @@ class Image
 
         $backgroundColor = static::generateRandomColor();
         $fontColor = ColorUtils::getComplementaryColor($backgroundColor);
-        $img = ImageManagerStatic::canvas($width, $height, $backgroundColor);
+        $img = ImageManager::create($width, $height)->fill($backgroundColor);
         $text ??= $width . 'x' . $height;
         $fontSize = (int) ($width / mb_strlen($text));
 
@@ -29,7 +29,7 @@ class Image
             $text,
             (int) ($width / 2),
             (int) ($height / 2),
-            static function (AbstractFont $font) use ($fontSize, $fontColor): void {
+            function (FontFactory $font) use ($fontSize, $fontColor): void {
                 $font->file(__DIR__ . '/../../assets/CamingoCode-Italic.ttf');
                 $font->size($fontSize);
                 $font->align('center');
@@ -37,7 +37,7 @@ class Image
                 $font->color($fontColor);
             }
         );
-        $img->encode($encoding);
+        $img->encodeByExtension($encoding);
 
         return $img;
     }
