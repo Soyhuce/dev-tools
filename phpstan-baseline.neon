@@ -1,52 +1,80 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Cannot cast Symfony\\\\Component\\\\Console\\\\Input\\\\InputInterface\\|null to string\\.$#"
-			count: 1
-			path: src/Debug/Collectors/ArtisanCollector.php
-
-		-
-			message: "#^Binary operation \"\\-\" between float and non\\-empty\\-array\\|non\\-falsy\\-string results in an error\\.$#"
+			message: '#^Binary operation "\-" between float and non\-empty\-array\|non\-falsy\-string results in an error\.$#'
+			identifier: binaryOp.invalid
 			count: 1
 			path: src/Debug/Collectors/TimeCollector.php
 
 		-
-			message: "#^Call to an undefined method Soyhuce\\\\DevTools\\\\Debug\\\\Collectors\\\\DataCollector\\:\\:addMessage\\(\\)\\.$#"
+			message: '#^Call to an undefined method Soyhuce\\DevTools\\Debug\\Collectors\\DataCollector\:\:addMessage\(\)\.$#'
+			identifier: method.notFound
 			count: 1
 			path: src/Debug/DebugManager.php
 
 		-
-			message: "#^Call to an undefined method Soyhuce\\\\DevTools\\\\Debug\\\\Collectors\\\\DataCollector\\:\\:increment\\(\\)\\.$#"
+			message: '#^Call to an undefined method Soyhuce\\DevTools\\Debug\\Collectors\\DataCollector\:\:increment\(\)\.$#'
+			identifier: method.notFound
 			count: 1
 			path: src/Debug/DebugManager.php
 
 		-
-			message: "#^Call to an undefined method Soyhuce\\\\DevTools\\\\Debug\\\\Collectors\\\\DataCollector\\:\\:setRequest\\(\\)\\.$#"
+			message: '#^Call to an undefined method Soyhuce\\DevTools\\Debug\\Collectors\\DataCollector\:\:setRequest\(\)\.$#'
+			identifier: method.notFound
 			count: 1
 			path: src/Debug/DebugManager.php
 
 		-
-			message: "#^Call to an undefined method Soyhuce\\\\DevTools\\\\Debug\\\\Collectors\\\\DataCollector\\:\\:setResponse\\(\\)\\.$#"
+			message: '#^Call to an undefined method Soyhuce\\DevTools\\Debug\\Collectors\\DataCollector\:\:setResponse\(\)\.$#'
+			identifier: method.notFound
 			count: 1
 			path: src/Debug/DebugManager.php
 
 		-
-			message: "#^Call to an undefined method Soyhuce\\\\DevTools\\\\Debug\\\\Collectors\\\\DataCollector\\:\\:startMeasure\\(\\)\\.$#"
+			message: '#^Call to an undefined method Soyhuce\\DevTools\\Debug\\Collectors\\DataCollector\:\:startMeasure\(\)\.$#'
+			identifier: method.notFound
 			count: 1
 			path: src/Debug/DebugManager.php
 
 		-
-			message: "#^Call to an undefined method Soyhuce\\\\DevTools\\\\Debug\\\\Collectors\\\\DataCollector\\:\\:stopMeasure\\(\\)\\.$#"
+			message: '#^Call to an undefined method Soyhuce\\DevTools\\Debug\\Collectors\\DataCollector\:\:stopMeasure\(\)\.$#'
+			identifier: method.notFound
 			count: 1
 			path: src/Debug/DebugManager.php
 
 		-
-			message: "#^Unsafe access to private property Soyhuce\\\\DevTools\\\\Debug\\\\DebugManager\\:\\:\\$availableCollectors through static\\:\\:\\.$#"
+			message: '#^Method Soyhuce\\DevTools\\Debug\\DebugManager\:\:warnings\(\) should return Illuminate\\Support\\Collection\<int, string\> but returns Illuminate\\Support\\Collection\<\(int\|string\), non\-falsy\-string\>\.$#'
+			identifier: return.type
 			count: 1
 			path: src/Debug/DebugManager.php
 
 		-
-			message: "#^Unsafe call to private method Soyhuce\\\\DevTools\\\\Faker\\\\Image\\:\\:generateRandomColor\\(\\) through static\\:\\:\\.$#"
+			message: '#^Parameter \#1 \$value of method Illuminate\\Support\\Collection\<\(int\|string\),string\>\:\:prepend\(\) expects non\-falsy\-string, literal\-string given\.$#'
+			identifier: argument.type
 			count: 1
-			path: src/Faker/Image.php
+			path: src/Debug/DebugManager.php
+
+		-
+			message: '#^Parameter \#1 \.\.\.\$values of method Illuminate\\Support\\Collection\<\(int\|string\),string\>\:\:push\(\) expects non\-falsy\-string, literal\-string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Debug/DebugManager.php
+
+		-
+			message: '#^Unsafe access to private property Soyhuce\\DevTools\\Debug\\DebugManager\:\:\$availableCollectors through static\:\:\.$#'
+			identifier: staticClassAccess.privateProperty
+			count: 1
+			path: src/Debug/DebugManager.php
+
+		-
+			message: '#^Parameter \#1 \.\.\.\$arg1 of function max expects non\-empty\-array, array\<float\|int\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Tools/Stats.php
+
+		-
+			message: '#^Parameter \#1 \.\.\.\$arg1 of function min expects non\-empty\-array, array\<float\|int\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Tools/Stats.php
 

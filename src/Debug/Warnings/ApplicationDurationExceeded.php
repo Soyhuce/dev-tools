@@ -3,6 +3,7 @@
 namespace Soyhuce\DevTools\Debug\Warnings;
 
 use Soyhuce\DevTools\Tools\Time;
+use function sprintf;
 
 class ApplicationDurationExceeded extends Warning
 {

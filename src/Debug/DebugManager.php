@@ -19,13 +19,14 @@ use Soyhuce\DevTools\Debug\Collectors\ResponseCollector;
 use Soyhuce\DevTools\Debug\Collectors\TimeCollector;
 use Soyhuce\DevTools\Debug\Entries\Entry;
 use Soyhuce\DevTools\Debug\Warnings\Warning;
+use function sprintf;
 
 class DebugManager
 {
     use DefinesHelpers;
     use ForwardsCallsToCollectors;
 
-    /** @var array<class-string<\Soyhuce\DevTools\Debug\Collectors\DataCollector>> */
+    /** @var array<int, class-string<DataCollector>> */
     private static array $availableCollectors = [
         ArtisanCollector::class,
         CounterCollector::class,
@@ -70,13 +71,7 @@ class DebugManager
 
     private function registerDebugMiddleware(): void
     {
-        $httpKernel = app(HttpKernel::class);
-
-        if (!method_exists($httpKernel, 'pushMiddleware')) {
-            return;
-        }
-
-        $httpKernel->pushMiddleware(DebugMiddleware::class);
+        app(HttpKernel::class)->pushMiddleware(DebugMiddleware::class);
     }
 
     private function resolveCollectors(): void
@@ -106,7 +101,7 @@ class DebugManager
     }
 
     /**
-     * @return \Illuminate\Support\Collection<string>
+     * @return Collection<int, string>
      */
     private function entries(): Collection
     {
@@ -117,7 +112,7 @@ class DebugManager
     }
 
     /**
-     * @return \Illuminate\Support\Collection<string>
+     * @return Collection<int, string>
      */
     private function warnings(): Collection
     {

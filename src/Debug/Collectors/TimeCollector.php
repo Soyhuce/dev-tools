@@ -11,7 +11,7 @@ use Soyhuce\DevTools\Debug\Warnings\ApplicationDurationExceeded;
  */
 class TimeCollector extends DataCollector
 {
-    /** @var array<string, \Soyhuce\DevTools\Debug\Entries\Measure> */
+    /** @var array<string, Measure> */
     private array $measures = [];
 
     public function __construct(

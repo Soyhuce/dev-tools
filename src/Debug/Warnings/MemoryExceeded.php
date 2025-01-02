@@ -3,6 +3,7 @@
 namespace Soyhuce\DevTools\Debug\Warnings;
 
 use Soyhuce\DevTools\Tools\Memory;
+use function sprintf;
 
 class MemoryExceeded extends Warning
 {

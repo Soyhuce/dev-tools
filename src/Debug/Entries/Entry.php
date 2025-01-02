@@ -4,6 +4,7 @@ namespace Soyhuce\DevTools\Debug\Entries;
 
 use Illuminate\Support\Carbon;
 use Stringable;
+use function sprintf;
 
 class Entry implements Stringable
 {

@@ -2,6 +2,8 @@
 
 namespace Soyhuce\DevTools\Debug\Entries;
 
+use function sprintf;
+
 class Counter extends Entry
 {
     private int $count = 0;
