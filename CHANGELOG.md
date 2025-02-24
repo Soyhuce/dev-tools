@@ -2,6 +2,14 @@
 
 All notable changes to `soyhuce/dev-tools` will be documented in this file
 
+## 4.1.0 - 2025-02-24
+
+### What's Changed
+
+* Run tests with Laravel 12 by @bastien-phi in https://github.com/Soyhuce/dev-tools/pull/25
+
+**Full Changelog**: https://github.com/Soyhuce/dev-tools/compare/4.0.0...4.1.0
+
 ## 4.0.0 - 2025-01-02
 
 ### What's Changed
