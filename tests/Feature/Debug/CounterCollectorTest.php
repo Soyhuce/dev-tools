@@ -1,60 +1,43 @@
 <?php
 
-namespace Soyhuce\DevTools\Test\Feature\Debug;
-
+use Illuminate\Foundation\Application;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Soyhuce\DevTools\Debug\Debug;
-use Soyhuce\DevTools\Test\TestCase;
+use function Orchestra\Testbench\Pest\defineEnvironment;
 
-/**
- * @coversNothing
- */
-class CounterCollectorTest extends TestCase
-{
-    protected function getEnvironmentSetUp($app): void
-    {
-        parent::getEnvironmentSetUp($app);
-        $app['config']->set([
-            'dev-tools.debugger.enabled' => true,
-            'dev-tools.debugger.counter.enabled' => true,
-        ]);
-    }
+defineEnvironment(function (Application $app): void {
+    $app['config']->set([
+        'dev-tools.debugger.enabled' => true,
+        'dev-tools.debugger.counter.enabled' => true,
+    ]);
+});
 
-    /**
-     * @test
-     */
-    public function counterIsCollected(): void
-    {
-        Debug::incrementCounter('foo');
+test('counter is collected', function (): void {
+    Debug::incrementCounter('foo');
 
-        $log = Log::shouldReceive('debug')
-            ->withArgs(static function (string $message) {
-                return Str::contains($message, 'counter : foo -> 1');
-            });
+    $log = Log::shouldReceive('debug')
+        ->withArgs(static function (string $message) {
+            return Str::contains($message, 'counter : foo -> 1');
+        });
 
-        Debug::log();
+    Debug::log();
 
-        $log->verify();
-        $this->addToAssertionCount(1);
-    }
+    $log->verify();
+    $this->addToAssertionCount(1);
+});
 
-    /**
-     * @test
-     */
-    public function counterIsCanBeIncrementedMultipleTimes(): void
-    {
-        Collection::times(15, static fn () => Debug::incrementCounter('foo', 2));
+test('counter is can be incremented multiple times', function (): void {
+    Collection::times(15, static fn () => Debug::incrementCounter('foo', 2));
 
-        $log = Log::shouldReceive('debug')
-            ->withArgs(static function (string $message) {
-                return Str::contains($message, 'counter : foo -> 30');
-            });
+    $log = Log::shouldReceive('debug')
+        ->withArgs(static function (string $message) {
+            return Str::contains($message, 'counter : foo -> 30');
+        });
 
-        Debug::log();
+    Debug::log();
 
-        $log->verify();
-        $this->addToAssertionCount(1);
-    }
-}
+    $log->verify();
+    $this->addToAssertionCount(1);
+});
