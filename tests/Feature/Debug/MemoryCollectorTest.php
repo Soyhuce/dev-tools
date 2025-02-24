@@ -1,39 +1,26 @@
 <?php
 
-namespace Soyhuce\DevTools\Test\Feature\Debug;
-
+use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Soyhuce\DevTools\Debug\Debug;
-use Soyhuce\DevTools\Test\TestCase;
+use function Orchestra\Testbench\Pest\defineEnvironment;
 
-/**
- * @coversNothing
- */
-class MemoryCollectorTest extends TestCase
-{
-    protected function getEnvironmentSetUp($app): void
-    {
-        parent::getEnvironmentSetUp($app);
-        $app['config']->set([
-            'dev-tools.debugger.enabled' => true,
-            'dev-tools.debugger.memory.enabled' => true,
-        ]);
-    }
+defineEnvironment(function (Application $app): void {
+    $app['config']->set([
+        'dev-tools.debugger.enabled' => true,
+        'dev-tools.debugger.memory.enabled' => true,
+    ]);
+});
 
-    /**
-     * @test
-     */
-    public function memoryIsCollected(): void
-    {
-        $log = Log::shouldReceive('debug')
-            ->withArgs(static function (string $message) {
-                return Str::contains($message, 'memory : ');
-            });
+test('memory is collected', function (): void {
+    $log = Log::shouldReceive('debug')
+        ->withArgs(static function (string $message) {
+            return Str::contains($message, 'memory : ');
+        });
 
-        Debug::log();
+    Debug::log();
 
-        $log->verify();
-        $this->addToAssertionCount(1);
-    }
-}
+    $log->verify();
+    $this->addToAssertionCount(1);
+});
