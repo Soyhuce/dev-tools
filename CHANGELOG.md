@@ -2,6 +2,14 @@
 
 All notable changes to `soyhuce/dev-tools` will be documented in this file
 
+## 4.2.0 - 2026-03-02
+
+### What's Changed
+
+* Add support for PHP 8.5 in https://github.com/Soyhuce/dev-tools/pull/26
+
+**Full Changelog**: https://github.com/Soyhuce/dev-tools/compare/4.1.0...4.2.0
+
 ## 4.1.0 - 2025-02-24
 
 ### What's Changed
